@@ -15,7 +15,7 @@ class Tweet < ActiveRecord::Base
        :created_at=>created_at_formatted, 
        :sender_screen_name=>user.username, 
        :recipient_screen_name=>recipient.username,
-       :sender=>user.to_map(),
+       :sender=>user.to_map,
        :recipient=>recipient.to_map()}
     else
       ret = {:truncated=>false,

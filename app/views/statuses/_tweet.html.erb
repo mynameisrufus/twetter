@@ -4,7 +4,7 @@
     <% if (type!='mine') %>
     <span class="thumb vcard author">
         <a href="/<%= h tweet.user.username %>" class="url">
-            <img alt="<%= h tweet.user.name %>" class="photo fn" height="48" src="<%= h tweet.user.web_profile_url %>" width="48"/></a>
+            <img alt="<%= h tweet.user.name %>" class="photo fn" height="48" src="<%= h tweet.user.avatar.url %>" width="48"/></a>
     </span>
     <% end %>
     <span class="status-body">
