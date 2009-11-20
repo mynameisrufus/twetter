@@ -40,8 +40,10 @@ class AccountController < ApplicationController
   end
 
   def picture
-    if (request.post?)
-      User.upload_image(@user.username, params[:profile_image][:uploaded_data].read)
+    if request.post?
+      current_user.avatar = params[:image]
+      current_user.save!
+      flash[:notice] = "That's a pretty (ugly) photo!"
     end
   end
 
@@ -49,13 +51,5 @@ class AccountController < ApplicationController
 
   def date_formatted(date)
     date.gmtime.strftime("%a %b %d %H:%M:%S +0000 %Y")
-  end
-
-  def upload_image(image)
-    upload_image = "#{RAILS_ROOT}/tmp/upload/#{@user.username}"
-    File.open(upload_image, "wb") { |f| f.write(image.read) }
-    cmd = "convert -size 200x200 #{upload_image} #{RAILS_ROOT}/public/images/profile/#{@user.username}.png"
-    logger.info cmd
-    logger.info `#{cmd}`
   end
 end

@@ -23,4 +23,5 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
 
   map.connect ":username/:action", :controller => "user"
+  map.connect ":username/status/:id", :controller => "statuses", :action => "show"
 end
