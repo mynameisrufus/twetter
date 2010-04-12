@@ -7,7 +7,7 @@
       <span class="actions">
         <div><a id="status_star_<%= @tweet.id %>" class="fav-action non-fav" title="favorite this tweet">&nbsp;&nbsp;</a></div>
       </span>
-      <span class="entry-content"><%= @tweet.tweet %></span>
+      <span class="entry-content"><%= create_links @tweet.tweet %></span>
     </span>
     <span class="meta entry-meta" data='{}'>
       <a class="entry-date" rel="bookmark" href="<%= status_path(@tweet) %>"><span class="published timestamp" data="{time:'<%= @tweet.created_at.to_json %>'}"><%= time_ago_in_words @tweet.created_at %> ago</span></a>
