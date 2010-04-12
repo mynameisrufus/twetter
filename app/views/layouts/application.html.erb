@@ -50,7 +50,7 @@
     </style>
 </head>
 
-<body class="<%= @body_classes %>" id="<%= @body_id %>">
+<body class="<%= [browser, @body_classes].compact.join(' ') %>" id="<%= @body_id %>">
 <div id="dim-screen"></div>
 <ul id="accessibility" class="offscreen">
     <li>On a mobile phone? Check out <a href="http://m.twitter.com/">m.twitter.com</a>!</li>

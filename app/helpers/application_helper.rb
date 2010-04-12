@@ -6,6 +6,15 @@ module ApplicationHelper
         @body_classes = options[:body_classes] || "account"
     end
 
+  def browser
+    # This is only a high-level setting - more rendering engine than anything.
+    # e.g. '#side ul li a' need different padding in webkit.
+    # Just going with the values twitter use.
+    %w[safari firefox opera msie].detect {|token|
+      request.user_agent.downcase[token]
+    }
+  end
+
   def promotions
     [
       {:name => 'Rails&middot;camp', :part => 'n.', :text => 'Hermanos, hacking and hops. The good life.'},
