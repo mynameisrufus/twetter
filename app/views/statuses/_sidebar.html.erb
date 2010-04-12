@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
 
-    <div class="section">
+    <div id="profile" class="section">
         <div class="user_icon">
             <a href="/<%= h @user.username %>" class="url" rel="contact" title="<%= h @user.name %>"><img alt="<%= h @user.name %>" class="side_thumb photo fn" height="73" src="<%= @user.avatar.url %>" width="73"/></a>
 
