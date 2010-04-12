@@ -13,29 +13,13 @@
         <%= render :partial=>'user/promotion', :object => promotions.rand %>
     </div>
 
-    <ul id="tabMenu">
-        <li>
-
-            <a href="/home" id="home_tab">Home</a></li>
-        <li>
-            <a href="/replies" id="replies_tab">@<%= @user.username %></a></li>
-        <li>
-            <a href="/direct_messages" id="direct_messages_tab"><span id="message_count" class="stat_count"><%= @user.direct_messages_received.count %></span>
-                Direct Messages</a></li>
-
-        <li>
-            <a href="/search" id="search_tab">Search</a></li>
-
-        <li>
-            <a href="/favorites" id="favorites_tab">Favorites</a></li>
-        <li>
-            <a href="/public_timeline" id="public_timeline_tab">Everyone</a></li>
-      <!--
-      <li>
-        <a href="/statistics" id="search_tab">POPULARITY CONTEST</a></li>
-      </li>
-      -->
-
+    <ul id="primary_nav" class="sidebar-menu">
+      <%= sidebar_tab 'home', 'Home' %>
+      <%= sidebar_tab 'replies', "@#{@user.username}" %>
+      <%= sidebar_tab 'direct_messages', %Q{<span id="message_count" class="stat_count">#{@user.direct_messages_received.count}</span> Direct Messages} %>
+      <%= sidebar_tab 'search', 'Search' %>
+      <%= sidebar_tab 'favorites', 'Favorites' %>
+      <%= sidebar_tab 'public_timeline', 'Everyone' %>
     </ul>
 
     <div class="section last">

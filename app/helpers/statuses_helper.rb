@@ -3,6 +3,15 @@ module StatusesHelper
       user_status_path :username => tweet.user.username, :id => tweet.id
     end
 
+    def sidebar_tab name, contents
+      url = "/#{name}"
+      content_tag :li, :id => "#{name}_tab", :class => ('active' if current_page?(url)) do
+        content_tag :a, :class => 'in-page-link', :href => url do
+          contents
+        end
+      end
+    end
+
     # Take a Status update and generate link elements
     def create_links(tweet)
       # NOTE: URLs before Users, otherwise we'll double escape the URLs
