@@ -26,9 +26,9 @@ class Tweet < ActiveRecord::Base
     else
       ret = {:truncated=>false,
        :favorited=>false,
-       :in_reply_to_status_id=>nil,
+       :in_reply_to_status_id=>in_reply_to_status_id,
        :created_at=> created_at_formatted, #Sun Nov 23 09:19:13 +0000 2008"
-       :in_reply_to_user_id=>in_reply_to_id,
+       :in_reply_to_user_id=>recipient_id,
        :id=>id,
        :source=>source,
        :text=>tweet}
