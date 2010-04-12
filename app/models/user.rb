@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   end
 
   def profile_url
-    avatar.url
+    "http://twitter.com#{avatar.url}"
   end
 
   def to_map(include_latest=false)
