@@ -17,7 +17,7 @@
 
             <a href="/home" id="home_tab">Home</a></li>
         <li>
-            <a href="/replies" id="replies_tab">@Replies</a></li>
+            <a href="/replies" id="replies_tab">@<%= @user.username %></a></li>
         <li>
             <a href="/direct_messages" id="direct_messages_tab"><span id="message_count" class="stat_count"><%= @user.direct_messages_received.count %></span>
                 Direct Messages</a></li>

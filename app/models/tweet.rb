@@ -2,7 +2,12 @@ class Tweet < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipient, :class_name => "User"
   belongs_to :in_reply_to, :class_name => "Tweet"
-    
+
+  named_scope :mentions, lambda{|user| {
+    :conditions => [%Q{tweet_type IN ('tweet','reply') AND tweet LIKE ?}, "%@#{user.username}%"],
+    :order => 'created_at DESC'
+  } }
+
   def created_at_formatted
     self.created_at.gmtime.strftime("%a %b %d %H:%M:%S +0000 %Y")
   end

@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   has_attached_file :avatar
 
   has_many :tweets
-    has_many :replies, :class_name=>'Tweet', :foreign_key=>'in_reply_to_id', :conditions=>"tweet_type='reply'", :order => "tweets.created_at DESC"
     has_many :direct_messages_received, :class_name=>'Tweet', :foreign_key=>'recipient_id', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
     has_many :direct_messages_sent, :class_name=>'Tweet', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
     has_many :public_tweets, :class_name=>'Tweet', :conditions=>"tweet_type!='direct'", :order=>"tweets.created_at DESC"
