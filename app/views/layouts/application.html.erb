@@ -55,7 +55,7 @@
 
 <body class="<%= @body_classes %>" id="<%= @body_id %>">
 <div id="dim-screen"></div>
-<ul id="accessibility">
+<ul id="accessibility" class="offscreen">
     <li>On a mobile phone? Check out <a href="http://m.twitter.com/">m.twitter.com</a>!</li>
     <li><a href="#footer" accesskey="2">Skip to navigation</a></li>
     <li><a href="#tabMenu" accesskey="3">Jump to the sidebar</a></li>
@@ -67,13 +67,13 @@
 <div id="container" class="subpage">
     <span id="loader" style="display:none"><img alt="Loader" src="/images/loader.gif"/></span>
 
-    <h1 id="header">
+    <div id="header" class="clearfix">
         <a href="/home" title="Twetter: home" accesskey="1" id="logo">
 
             <img alt="Twetter.com" height="29" src="/images/twitter_logo_s.png" width="125"/>
 
         </a>
-    </h1>
+    </div>
 
 
     <% if flash[:notice] || flash[:error] %>

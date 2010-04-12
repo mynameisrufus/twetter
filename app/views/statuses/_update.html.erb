@@ -1,4 +1,4 @@
-<form action="/status/update" id="doingForm" method="post">
+<form action="/status/update" id="doingForm" class="status-update-form" method="post">
     <div style="margin:0;padding:0">
         <input name="authenticity_token" type="hidden" value="35b185be716b1d76607e18b2fc154509ac055063"/></div>
     <input id="tab_action" name="tab" type="hidden" value="home"/>
@@ -24,9 +24,11 @@
             <% if (!@user.latest_tweet.nil?) %>
             <div id="currently">
                 <strong>Latest:</strong>
+      <div id="update_notifications">
         <span id="latest_status">
             <%= render :partial=>'statuses/latest', :object=>@user.latest_tweet %>
         </span>
+      </div>
             </div>
             <% end %>
         </div>
