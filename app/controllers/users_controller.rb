@@ -9,8 +9,10 @@ class UsersController < ApplicationController
   end
  
   def show
-    logger.info "unimplemented: #{request.request_uri}"
-    render :nothing => true
+    @user = User.find_by_username(params['screen_name'])
+    respond_to {|wants|
+      wants.xml { render :xml => @user }
+    }
   end
 
   def create
