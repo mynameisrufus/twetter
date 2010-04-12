@@ -110,6 +110,10 @@ class User < ActiveRecord::Base
     friends
   end
 
+  def to_param
+    username
+  end
+
 
   private
 
