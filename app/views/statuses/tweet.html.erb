@@ -12,6 +12,9 @@
     <span class="meta entry-meta" data='{}'>
       <a class="entry-date" rel="bookmark" href="<%= status_path(@tweet) %>"><span class="published timestamp" data="{time:'<%= @tweet.created_at.to_json %>'}"><%= time_ago_in_words @tweet.created_at %> ago</span></a>
       <span>via <a href="http://echofon.com/" rel="nofollow">Echofon</a></span>
+      <% unless @tweet.in_reply_to_status.nil? %>
+        <%= link_to "in reply to #{@tweet.in_reply_to_status.user.username}", status_path(@tweet.in_reply_to_status) %>
+      <% end %>
     </span>
 
     <ul class="actions-hover">
