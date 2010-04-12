@@ -4,7 +4,8 @@
         <div class="user_icon">
             <a href="/<%= h @user.username %>" class="url" rel="contact" title="<%= h @user.name %>"><img alt="<%= h @user.name %>" class="side_thumb photo fn" height="73" src="<%= @user.avatar.url %>" width="73"/></a>
 
-            <p id="me_name"><%= h @user.username %></p>
+            <span id="me_name"><%= h @user.username %></span>
+            <span id="me_tweets"><span id="update_count"><%= @user.tweets.count %></span> tweets</span>
 
         </div>
 
