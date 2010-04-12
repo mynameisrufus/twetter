@@ -34,6 +34,11 @@ class ApplicationController < ActionController::Base
     x
   end
 
+  def current_domain
+    "http://#{request.host}"
+  end
+  helper_method :current_domain
+
   private
 
   def login_via_oauth
