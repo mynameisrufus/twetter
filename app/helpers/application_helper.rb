@@ -4,6 +4,5 @@ module ApplicationHelper
         @title = "Twetter / #{options[:title]}" || "Twetter"
         @body_id = options[:body_id] || "body"
         @body_classes = options[:body_classes] || "account"
-        @css = options[:css] || []
     end
 end
