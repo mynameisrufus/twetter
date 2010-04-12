@@ -15,8 +15,8 @@
         <span class="meta entry-meta">
             <a href="/<%= h tweet.user.username %>/status/<%= h tweet.id %>" class="entry-date" rel="bookmark"><span class="published">about <%= time_ago_in_words(tweet.created_at) %> ago</span></a>
             <span>from <%= h tweet.source %></span>
-            <% unless tweet.in_reply_to.nil? %>
-              <%= link_to "in reply to #{tweet.in_reply_to.user.username}", status_path(tweet.in_reply_to) %>
+            <% unless tweet.in_reply_to_status.nil? %>
+              <%= link_to "in reply to #{tweet.in_reply_to_status.user.username}", status_path(tweet.in_reply_to_status) %>
             <% end %>
         </span>
     </span>
