@@ -1,4 +1,8 @@
 module StatusesHelper
+    def status_path tweet
+      user_status_path :username => tweet.user.username, :id => tweet.id
+    end
+
     # Take a Status update and generate link elements
     def create_links(tweet)
       # NOTE: URLs before Users, otherwise we'll double escape the URLs
