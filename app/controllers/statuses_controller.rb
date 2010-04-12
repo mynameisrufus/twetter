@@ -16,7 +16,6 @@ class StatusesController < ApplicationController
   end
 
   def friends_timeline
-    logger.info "request=#{@user}"
     @page = params[:page].nil? ? 1 : params[:page].to_i
     from = (@page - 1 ) * TWEETS_PER_PAGE
     to = TWEETS_PER_PAGE + from + 1
