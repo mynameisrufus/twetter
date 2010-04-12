@@ -1,6 +1,7 @@
 class Tweet < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipient, :class_name => "User"
+  belongs_to :in_reply_to, :class_name => "Tweet"
     
   def created_at_formatted
     self.created_at.gmtime.strftime("%a %b %d %H:%M:%S +0000 %Y")
@@ -22,7 +23,7 @@ class Tweet < ActiveRecord::Base
        :favorited=>false,
        :in_reply_to_status_id=>nil,
        :created_at=> created_at_formatted, #Sun Nov 23 09:19:13 +0000 2008"
-       :in_reply_to_user_id=>(recipient_id ? recipient_id : nil),
+       :in_reply_to_user_id=>in_reply_to_id,
        :id=>id,
        :source=>source,
        :text=>tweet}
