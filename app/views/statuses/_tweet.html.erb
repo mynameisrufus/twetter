@@ -13,7 +13,7 @@
         <% end %>
         <span class="entry-content"><%= create_links(tweet.tweet) %></span>
         <span class="meta entry-meta">
-            <a href="http://twitter.com/<%= h tweet.user.username %>/status/<%= h tweet.id %>" class="entry-date" rel="bookmark"><span class="published"><%= time_ago_in_words(tweet.created_at) %></span></a>
+            <a href="/<%= h tweet.user.username %>/status/<%= h tweet.id %>" class="entry-date" rel="bookmark"><span class="published"><%= time_ago_in_words(tweet.created_at) %></span></a>
             <span>from <%= h tweet.source %></span>
             <% if (!tweet.recipient.nil?) %>
                 <a href="/<%= tweet.recipient.username %>/status/<%= h tweet.id %>">in reply to <%= tweet.recipient.username %></a>

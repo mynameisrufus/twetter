@@ -23,7 +23,7 @@
                         <input class="requires-auth" id="user_screen_name" maxlength="15" name="user[username]" size="15" type="text" value="<%= h @user.username %>"/>
 
                         <p>
-                            <small>Your URL: http://twitter.com/<span id="username_url"><%= h @user.username %></span>
+                            <small>Your URL: <%= current_domain %>/<span id="username_url"><%= h @user.username %></span>
                             </small>
                             <br/>
 
