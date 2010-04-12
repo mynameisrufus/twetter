@@ -874,3 +874,9 @@ $.fn.occasionally = function(H, I) {
 (function(A) {
     A.ajaxSetup({beforeSend:twttr.loading,complete:twttr.loaded})
 })(jQuery);
+
+$(function() {
+  $.each(['safari', 'mozilla', 'opera', 'msie'], function(type) {
+    if ($.browser[type]) $('body').addClass(type);
+  });
+});
