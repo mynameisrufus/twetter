@@ -10,8 +10,8 @@
 
     <span class="entry-meta"><a href="/<%= h latest.user.username %>/status/<%= h latest.id %>" class="entry-date" rel="bookmark"><span class="published" title="<%= latest.created_at_formatted %>"><%= time_ago_in_words(latest.created_at) %>
         ago</span></a> <span>from <%= h latest.source%></span>
-        <% if (!latest.recipient.nil?) then %>
-     <a href="http://twitter.com/rob_nielsen/status/1014433331">in reply to <%= latest.recipient.username %></a>
+        <% unless latest.in_reply_to.nil? %>
+          <%= link_to "in reply to #{latest.in_reply_to.user.username}", status_path(latest.in_reply_to) %>
     <% end %>
     </span>
 </span>
