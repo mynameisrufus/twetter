@@ -102,13 +102,12 @@ class StatusesController < ApplicationController
       recipient_name = $1
       tweet = $2
       recipient = User.fetch(recipient_name)
-    elsif (tweet=~/^@(\S+) /)
+    elsif params['in_reply_to_status_id']
       type="reply"
-      recipient_name = $1
-      recipient = User.fetch(recipient_name)
+      in_reply_to = Tweet.find_by_id(params['in_reply_to_status_id'])
     end
       
-    @tweet = Tweet.create({:tweet => tweet, :user => @user, :recipient => recipient, :tweet_type => type, :source => params[:source] || 'web'})
+    @tweet = Tweet.create({:tweet => tweet, :user => @user, :recipient => recipient, :in_reply_to => in_reply_to, :tweet_type => type, :source => params[:source] || 'web'})
     if (params['twttr'])
         latest_status = render_to_string :partial => "latest", :object=> @tweet
         ret = {"status_count"=>@user.public_tweets.count, "latest_status"=> latest_status,"text"=>tweet}
