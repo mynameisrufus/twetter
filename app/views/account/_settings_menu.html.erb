@@ -1,15 +1,16 @@
-<div style="float:left;margin-top:5px;">
-    <a href="/account/picture"><img alt="<%= @user.username %>" class="side_thumb photo fn" height="73" src="<%= @user.avatar.url %>" width="73"/></a>
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'settings' %>
+<% end %>
+
+<div class="page-header">
+  <h2>
+    <a href="/settings/profile"><img alt="corkboard_cc" class="photo fn" height="48" src="<%= @user.profile_url %>" width="48" /></a>
+    <%= "#{@user.username}’#{'s' unless @user.username[-1] == 's'}" %> settings
+  </h2>
 </div>
 
-<div style="float:left;margin-left:10px;margin-top:5px;"><h2><%= @user.username %></h2></div>
-
-<p style="clear:both;height:10px;"></p>
-
-<ul id="settingsNav">
-    <%= settings_list_entry('settings') %>
-<!--    <%= settings_list_entry('password') %> -->
-    <%= settings_list_entry('picture') %>
+<ul id="settings_nav" class="pills clearfix">
+  <%= sidebar_tab 'settings', 'Settings', :prefix => '/account' %>
+  <!-- <%= sidebar_tab 'password', 'Password', :prefix => '/account' %> -->
+  <%= sidebar_tab 'picture', 'Picture', :prefix => '/account' %>
 </ul>
-
-<div class="tab settings"></div>
