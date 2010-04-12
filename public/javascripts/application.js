@@ -150,8 +150,8 @@ $.fn.isUpdateForm = function() {
                     B.html(_("Reply to %{screen_name}:", {screen_name:J[1]}));
                     A.val(_("reply"))
                 } else {
-                    B.html(_("What are you doing?"));
-                    A.val(_("update"))
+                    B.html(_("What's happening?"));
+                    A.val(_("Tweet"))
                 }
             }
         }

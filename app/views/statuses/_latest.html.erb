@@ -1,9 +1,11 @@
 <span id="latest_text">
+    <strong>Latest:</strong>
     <span class="status-text"></span>
     <span id="latest_meta" class="entry-meta"><%= time_ago_in_words(latest.created_at)%> ago</span>
 </span>
 
 <span id="latest_text_full">
+    <strong>Latest:</strong>
     <span class="status-text">
       <%= create_links(latest.tweet) %>
     </span>

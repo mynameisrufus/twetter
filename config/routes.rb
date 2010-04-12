@@ -1,7 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.user_status '/:username/status/:id', :controller => 'statuses', :action => 'show'
-
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.resource :session
@@ -26,5 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
 
   map.connect ":username/:action", :controller => "user"
-  map.connect ":username/status/:id", :controller => "statuses", :action => "show"
+
+  map.user_status '/:username/status/:id', :controller => 'statuses', :action => 'show'
+  map.user '/:screen_name', :controller => 'users', :action => 'show'
 end

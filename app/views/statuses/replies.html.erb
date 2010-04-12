@@ -1,4 +1,4 @@
-<% setup(:title=>"Mentions", :body_id=>"replies", :body_classes=>"status replyable", :css=>['timeline']) %>
+<% setup(:title=>"Mentions", :body_id=>"replies", :body_classes=>"status replyable") %>
 <%= render :partial => "statuses/update" %>
 
 <h2 class="timeline-header">Tweets mentioning @<%= h @user.username %></h2>
