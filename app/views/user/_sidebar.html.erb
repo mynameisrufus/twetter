@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
 
-    <div class="section">
+    <div id="profile" class="section profile-side">
   <span class="section-links">
       </span>
         <address>
@@ -19,49 +19,34 @@
 
     </div>
 
-    <ul id="tabMenu">
-        <li>
-            <a href="/<%= h @duser.username %>" id="updates_tab">Updates</a></li>
-        <li>
-            <a href="/<%= h @duser.username %>/favourites" id="favorites_tab">Favorites</a></li>
+    <ul id="primary_nav" class="sidebar-menu">
+      <%= sidebar_tab @duser.username, %Q{<span id="update_count" class="stat_count">#{@user.tweets.count}</span> Tweets} %>
+      <%= sidebar_tab "#{@duser.username}/favourites", 'Favourites' %>
     </ul>
 
-    <div class="section last">
+    <hr/>
 
+    <% if false %>
+    <%# 'message' and 'block' are both broken, so... %>
+    <div id="profile_actions">
+      <h2 class="sidebar-title">Actions</h2>
+      <ul class="sidebar-actions">
+        <li><a href="/direct_messages/create/<%= @duser.id %>">message</a> <%= h @duser.username %></li>
+        <li><a href="/blocks/confirm/<%= @duser.id %>" style="color: gray;">block</a> <%= h @duser.username %></li>
+      </ul>
+    </div>
 
-        <div class="section-header">
+    <hr/>
+    <% end %>
 
-            <h1>Actions</h1>
-        </div>
-        <!-- /section-header -->
-        <ul>
-            <li>
-                <a href="/direct_messages/create/<%= @duser.id %>">message</a> <%= h @duser.username %>
-            </li>
-
-
-            <a href="/blocks/confirm/<%= @duser.id %>" style="color: gray;">block</a> <%= h @duser.username %>
-
-
-        </ul>
-
-        <br/>
-
-        <div class="section-header">
-            <h1>Following</h1>
-        </div>
-
-
-        <div id="friends">
-
-            <%= render :partial=>'friend', :collection=>@duser.friends[0..35] %>
-            <% if (@user.friends_count > 36) %>
-            <div id="friends_view_all"><a href="/friends" rel="me">View All&hellip;</a></div>
-            <% end %>
-
-
-        </div>
-        <br/>
+    <div id="following">
+      <h2 class="sidebar-title">Following</h2>
+      <div id="following_list">
+        <%= render :partial=>'friend', :collection=>@duser.friends[0..35] %>
+        <% if (@user.friends_count > 36) %>
+        <div id="friends_view_all"><a href="/friends" rel="me">View All&hellip;</a></div>
+        <% end %>
+      </div>
     </div>
 
 <% end %>
