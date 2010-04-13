@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   before_filter :authenticateUser, :lookup_duser
   
-  def index
+  def show
     @tweets = @duser.public_tweets.find(:all,:include => :user,:limit => 20  )
   end
 

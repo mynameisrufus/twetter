@@ -23,8 +23,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 
-  map.connect ":username/:action", :controller => "user"
-
   map.user_status '/:username/status/:id', :controller => 'statuses', :action => 'show'
-  map.user '/:screen_name', :controller => 'users', :action => 'show'
+  map.user '/:username', :controller => 'user', :action => 'show'
 end
