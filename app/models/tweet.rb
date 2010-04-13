@@ -3,6 +3,8 @@ class Tweet < ActiveRecord::Base
   belongs_to :recipient, :class_name => "User"
   belongs_to :in_reply_to_status, :class_name => "Tweet"
 
+  named_scope :replies, :conditions => {:tweet_type => 'reply'}
+
   named_scope :mentions, lambda{|user| {
     :conditions => [%Q{tweet_type IN ('tweet','reply') AND tweet LIKE ?}, "%@#{user.username}%"],
     :order => 'created_at DESC'
