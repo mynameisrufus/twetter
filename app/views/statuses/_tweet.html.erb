@@ -23,7 +23,14 @@
     <span class="actions">
         <div>
             <a class="fav-action <%= fav ? "" : "non-" %>fav" id="status_star_<%= h tweet.id %>" title="<%= fav ? "un-" : "" %>favorite this update">&nbsp;&nbsp;</a>
-            <a class="reply" href="/home?status=@<%= h tweet.user.username %>%20&amp;in_reply_to_status_id=<%= h tweet.id %>&amp;in_reply_to=<%= h tweet.user.username %>" title="reply to <%= h tweet.user.username %>">&nbsp;&nbsp;</a>
         </div>
     </span>
+    <ul class="actions-hover">
+      <li>
+        <span class="reply">
+          <span class="reply-icon icon"></span>
+          <a href="/home?status=@<%= h tweet.user.username %> %20&amp;in_reply_to_status_id=<%= h tweet.id %>&amp;in_reply_to=<%= h tweet.user.name %>">Reply</a>
+        </span>
+      </li>
+    </ul>
 </li>
