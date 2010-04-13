@@ -15,7 +15,7 @@
 
     <ul id="primary_nav" class="sidebar-menu">
       <%= sidebar_tab 'home', 'Home' %>
-      <%= sidebar_tab 'replies', "@#{@user.username}" %>
+      <%= sidebar_tab 'replies', %Q{<span id="message_count" class="stat_count">#{@user.mentions.count}</span> @#{@user.username}} %>
       <%= sidebar_tab 'direct_messages', %Q{<span id="message_count" class="stat_count">#{@user.direct_messages_received.count}</span> Direct Messages} %>
       <%= sidebar_tab 'search', 'Search' %>
       <%= sidebar_tab 'favorites', 'Favorites' %>

@@ -106,6 +106,10 @@ class User < ActiveRecord::Base
       User.find(:all, :conditions => ["id != ?", self.id])
   end
 
+  def mentions
+    Tweet.mentions(self)
+  end
+
   def followers
     friends
   end
