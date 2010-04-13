@@ -4,6 +4,7 @@ class AddInReplyToToTweets < ActiveRecord::Migration
     raise unless Tweet.replies.all? {|tweet|
       if tweet.recipient_id.nil?
         puts "Missing recipient_id on Tweet<#{tweet.id}> (#{tweet.tweet})"
+        true # This isn't a failure
       else
         user = User.find_by_id(tweet.recipient_id)
         if user.nil?
