@@ -10,7 +10,9 @@ class AddInReplyToToTweets < ActiveRecord::Migration
           :conditions => ["created_at < ?", tweet.created_at],
           :order => "created_at DESC"
         )
-        tweet.update_attribute :in_reply_to_status_id, in_reply_to.id
+        unless tweet.nil?
+          tweet.update_attribute :in_reply_to_status_id, in_reply_to.id
+        end
       end
     }
   end
