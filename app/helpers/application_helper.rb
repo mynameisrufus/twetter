@@ -31,7 +31,7 @@ module ApplicationHelper
       {:name => 'Gui&middot;tar He&middot;ro', :part => 'n.', :text => 'Because not all of us can be Eric Johnson.'},
 
       {:name => 'Ba&middot;na&middot;na&middot;jour', :part => 'n.', :text => 'A sinatra/bonjour app by @toolmantim for sharing publishing and discovering git repos. n.b.: There are no secret bananas.'},
-      {:name => 'Duke&middot;jour', :part => 'n.', :text => "There's a party, and your iTunes library is invited.'"},
+      {:name => 'Duke&middot;jour', :part => 'n.', :text => "There's a party, and your iTunes library is invited."},
     ]
   end
 end
