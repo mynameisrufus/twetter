@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   end
 
   def friends
-      User.find(:all, :conditions => ["id != ?", self.id])
+    User.find(:all, :conditions => ["id != ?", self.id], :order => :username)
   end
 
   def mentions
