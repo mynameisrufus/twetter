@@ -1,4 +1,4 @@
-<% setup(:title=>@duser.username, :body_id=>"profile_image", :css=>['timeline']) %>
+<% setup(:title=>@duser.username, :body_id=>"profile_image") %>
 
 <table cellspacing="0" class="columns">
           <tbody>
@@ -7,9 +7,9 @@
               <td id="content" class="column">
                                 <div class="wrapper">
 
-                  <h2><a href="http://twitter.com/<%= h @duser.username %>"><%= h @duser.name || @duser.username %></a></h2>
+                  <h2><a href="/<%= h @duser.username %>"><%= h @duser.name || @duser.username %></a></h2>
 
-<p><img alt="<%= @duser.username %>" src="<%= @duser.web_profile_url(:full) %>" /></p>
+<p><img alt="<%= @duser.username %>" src="<%= @duser.avatar.url %>" /></p>
 
 <% if (@user == @duser) %>
 <p><small><a href="/account/picture">Change this?</a></small></p>

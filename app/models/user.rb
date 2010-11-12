@@ -4,9 +4,10 @@ class User < ActiveRecord::Base
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
+  
+  has_attached_file :avatar
 
   has_many :tweets
-    has_many :replies, :class_name=>'Tweet', :foreign_key=>'recipient_id', :conditions=>"tweet_type='reply'", :order => "tweets.created_at DESC"
     has_many :direct_messages_received, :class_name=>'Tweet', :foreign_key=>'recipient_id', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
     has_many :direct_messages_sent, :class_name=>'Tweet', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
     has_many :public_tweets, :class_name=>'Tweet', :conditions=>"tweet_type!='direct'", :order=>"tweets.created_at DESC"
@@ -37,7 +38,6 @@ class User < ActiveRecord::Base
   # This will also let us return a human error message.
   #
   def self.authenticate(login, password)
-    puts "authenticate(#{login},#{password})"
      u = fetch(login)
      if (!u.crypted_password)
          u.password = password
@@ -70,17 +70,8 @@ class User < ActiveRecord::Base
     `#{cmd}`
   end
 
-  def web_profile_url(type = :small)
-    path = "/images/profile#{type == :full ? "/full" : ""}/#{self.username}.png"
-    if (!File.exists?("#{RAILS_ROOT}/public#{path}"))
-      path = "/images/default_profile#{type == :full ? "_bigger" : ""}.png"
-    end
-    number = File.mtime("#{RAILS_ROOT}/public#{path}").to_i.to_s rescue ""
-    "#{path}?#{number}"
-  end
-
   def profile_url
-    "http://twitter.com#{self.web_profile_url}"
+    "http://twitter.com#{avatar.url}"
   end
 
   def to_map(include_latest=false)
@@ -112,11 +103,19 @@ class User < ActiveRecord::Base
   end
 
   def friends
-      User.find(:all, :conditions => ["id != ?", self.id])
+    User.find(:all, :conditions => ["id != ?", self.id], :order => :username)
+  end
+
+  def mentions
+    Tweet.mentions(self)
   end
 
   def followers
     friends
+  end
+
+  def to_param
+    username
   end
 
 

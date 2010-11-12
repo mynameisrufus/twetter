@@ -1,10 +1,10 @@
-<% fav = !@user.favorite_tweets.find_by_id(tweet.id).nil? %>
+<% fav = !@user.nil? && !@user.favorite_tweets.find_by_id(tweet.id).nil? %>
 
-<li class="hentry status <% fav ? "favorite" : "" -%>u-<%= h tweet.user.username -%><%= (tweet.user==@user) ? " mine" : "" -%><%= ((type=='mine' && tweet_counter==0) || type=='friends_update') ? " latest-status":"" %>" id="status_<%= h tweet.id -%>">
+<li class="hentry status <% fav ? "favorite" : "" -%>u-<%= h tweet.user.username -%><%= (!@user.nil? && (tweet.user==@user)) ? " mine" : "" -%><%= ((type=='mine' && tweet_counter==0) || type=='friends_update') ? " latest-status":"" %>" id="status_<%= h tweet.id -%>">
     <% if (type!='mine') %>
     <span class="thumb vcard author">
         <a href="/<%= h tweet.user.username %>" class="url">
-            <img alt="<%= h tweet.user.name %>" class="photo fn" height="48" src="<%= h tweet.user.web_profile_url %>" width="48"/></a>
+            <img alt="<%= h tweet.user.name %>" class="photo fn" height="48" src="<%= h tweet.user.avatar.url %>" width="48"/></a>
     </span>
     <% end %>
     <span class="status-body">
@@ -13,17 +13,24 @@
         <% end %>
         <span class="entry-content"><%= create_links(tweet.tweet) %></span>
         <span class="meta entry-meta">
-            <a href="http://twitter.com/<%= h tweet.user.username %>/status/<%= h tweet.id %>" class="entry-date" rel="bookmark"><span class="published"><%= time_ago_in_words(tweet.created_at) %></span></a>
+            <a href="/<%= h tweet.user.username %>/status/<%= h tweet.id %>" class="entry-date" rel="bookmark"><span class="published"><%= time_ago_in_words(tweet.created_at) %> ago</span></a>
             <span>from <%= h tweet.source %></span>
-            <% if (!tweet.recipient.nil?) %>
-                <a href="/<%= tweet.recipient.username %>/status/<%= h tweet.id %>">in reply to <%= tweet.recipient.username %></a>
+            <% unless tweet.in_reply_to_status.nil? %>
+              <%= link_to "in reply to #{tweet.in_reply_to_status.user.username}", status_path(tweet.in_reply_to_status) %>
             <% end %>
         </span>
     </span>
     <span class="actions">
         <div>
             <a class="fav-action <%= fav ? "" : "non-" %>fav" id="status_star_<%= h tweet.id %>" title="<%= fav ? "un-" : "" %>favorite this update">&nbsp;&nbsp;</a>
-            <a class="reply" href="/home?status=@<%= h tweet.user.username %>%20&amp;in_reply_to_status_id=<%= h tweet.id %>&amp;in_reply_to=<%= h tweet.user.username %>" title="reply to <%= h tweet.user.username %>">&nbsp;&nbsp;</a>
         </div>
     </span>
+    <ul class="actions-hover">
+      <li>
+        <span class="reply">
+          <span class="reply-icon icon"></span>
+          <a href="/home?status=@<%= h tweet.user.username %> %20&amp;in_reply_to_status_id=<%= h tweet.id %>&amp;in_reply_to=<%= h tweet.user.name %>">Reply</a>
+        </span>
+      </li>
+    </ul>
 </li>

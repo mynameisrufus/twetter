@@ -1,2 +1,47 @@
-<% setup(:title=>"Tweet", :body_id=>"tweet", :body_classes=>"tweet", :css=>['screen']) %>
-<%= render :partial=>'tweet', :object=>@tweet %>
+<% setup(:title=>"Tweet", :body_id=>"show", :body_classes=>"tweet") %>
+
+<div id="permalink" class="status">
+  <div class="hentry u-pat status" id="status_<%= @tweet.id %>">
+    <span class="status-body">
+    <span class="status-content">
+      <span class="actions">
+        <div><a id="status_star_<%= @tweet.id %>" class="fav-action non-fav" title="favorite this tweet">&nbsp;&nbsp;</a></div>
+      </span>
+      <span class="entry-content"><%= create_links @tweet.tweet %></span>
+    </span>
+    <span class="meta entry-meta" data='{}'>
+      <a class="entry-date" rel="bookmark" href="<%= status_path(@tweet) %>"><span class="published timestamp" data="{time:'<%= @tweet.created_at.to_json %>'}"><%= time_ago_in_words @tweet.created_at %> ago</span></a>
+      <span>via <%= h @tweet.source %></span>
+      <% unless @tweet.in_reply_to_status.nil? %>
+        <%= link_to "in reply to #{@tweet.in_reply_to_status.user.username}", status_path(@tweet.in_reply_to_status) %>
+      <% end %>
+    </span>
+
+    <ul class="actions-hover">
+      <li>
+        <span class="reply">
+          <span class="reply-icon icon"></span>
+          <a href="<%= "/?status=@#{@tweet.user.username}&in_reply_to_status_id=#{@tweet.id}&in_reply_to=#{@tweet.user.username}" %>" title="reply to <%= @tweet.user.name %>">Reply</a>
+        </span>
+      </li>
+      <li>
+        <span class="retweet-link">
+          <span class="retweet-icon icon"></span>
+          <a title="Retweet" href="#">Retweet</a>
+        </span>
+      </li>
+    </ul>
+  </span>
+</div>
+
+<div class="user-info clear">
+  <div class="thumb">
+    <a href="<%= user_path @tweet.user %>" class="tweet-url profile-pic" hreflang="en">
+      <img alt="" border="0" height="73" src="<%= @tweet.user.profile_url %>" style="vertical-align:middle" width="73" />
+    </a>
+  </div>
+  <div class="">
+    <a href="<%= user_path @tweet.user %>" class="tweet-url screen-name" hreflang="en" title="Pat Allan"><%= @tweet.user.username %></a>
+  </div>
+  <div class="full-name"><%= @tweet.user.name %></div>
+</div>

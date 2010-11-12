@@ -12,25 +12,21 @@ class DirectMessagesController < ApplicationController
   end    
 
   def create
-    tweet = params[:text]
-    type='direct'
     recipient = User.find(params[:user][:id])
-    @tweet = Tweet.create({:tweet => tweet, :user => @user, :recipient => recipient, :tweet_type => type, :source => 'web'})
+    @tweet = Tweet.create({:tweet => params[:text], :user => @user, :recipient => recipient, :tweet_type => 'direct', :source => 'web'})
     redirect_to :action => 'sent'
   end
   
   def new
-    tweet = params[:text]
-    type='direct'
-    recipient = User.fetch(params[:user])
-    @tweet = Tweet.create({:tweet => tweet, :user => @user, :recipient => recipient, :tweet_type => type, :source => params[:source]})
-    render_tweet        
+    recipient = User.find(params[:user])
+    @tweet = Tweet.create({:tweet => params[:text], :user => @user, :recipient => recipient, :tweet_type => 'direct', :source => params[:source]})
+    render_tweet
   end
 
   def destroy
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
-    render :text=>"OK"
+    render :text => "OK"
   end
    
 end

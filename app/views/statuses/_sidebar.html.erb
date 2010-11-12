@@ -1,40 +1,25 @@
 <% content_for :sidebar do %>
 
-    <div class="section">
+    <div id="profile" class="section">
         <div class="user_icon">
-            <a href="/<%= h @user.username %>" class="url" rel="contact" title="<%= h @user.name %>"><img alt="<%= h @user.name %>" class="side_thumb photo fn" height="73" src="<%= @user.web_profile_url %>" width="73"/></a>
+            <a href="/<%= h @user.username %>" class="url" rel="contact" title="<%= h @user.name %>"><img alt="<%= h @user.name %>" class="side_thumb photo fn" height="73" src="<%= @user.avatar.url %>" width="73"/></a>
 
-            <p id="me_name"><%= h @user.username %></p>
+            <span id="me_name"><%= h @user.username %></span>
+            <span id="me_tweets"><span id="update_count"><%= @user.tweets.count %></span> tweets</span>
 
         </div>
 
         <%= render :partial=>'user/user_stats', :object=> @user %>
-
+        <%= render :partial=>'user/promotion', :object => promotions.rand %>
     </div>
 
-    <ul id="tabMenu">
-        <li>
-
-            <a href="/home" id="home_tab">Home</a></li>
-        <li>
-            <a href="/replies" id="replies_tab">@Replies</a></li>
-        <li>
-            <a href="/direct_messages" id="direct_messages_tab"><span id="message_count" class="stat_count"><%= @user.direct_messages_received.count %></span>
-                Direct Messages</a></li>
-
-        <li>
-            <a href="/search" id="search_tab">Search</a></li>
-
-        <li>
-            <a href="/favorites" id="favorites_tab">Favorites</a></li>
-        <li>
-            <a href="/public_timeline" id="public_timeline_tab">Everyone</a></li>
-      <!--
-      <li>
-        <a href="/statistics" id="search_tab">POPULARITY CONTEST</a></li>
-      </li>
-      -->
-
+    <ul id="primary_nav" class="sidebar-menu">
+      <%= sidebar_tab 'home', 'Home' %>
+      <%= sidebar_tab 'replies', %Q{<span id="message_count" class="stat_count">#{@user.mentions.count}</span> @#{@user.username}} %>
+      <%= sidebar_tab 'direct_messages', %Q{<span id="message_count" class="stat_count">#{@user.direct_messages_received.count}</span> Direct Messages} %>
+      <%= sidebar_tab 'search', 'Search' %>
+      <%= sidebar_tab 'favorites', 'Favorites' %>
+      <%= sidebar_tab 'public_timeline', 'Everyone' %>
     </ul>
 
     <div class="section last">

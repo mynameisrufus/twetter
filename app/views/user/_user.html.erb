@@ -1,6 +1,6 @@
 <tr id="person_<%= user.id %>" class="vcard person <%= h user.username %>">
   <td class="thumb">
-    <a href="/<%= h user.username %>" rel="contact"><img alt="<%= h user.name %>" class="photo fn" height="48" src="<%= h user.web_profile_url %>" width="48" /></a>
+    <a href="/<%= h user.username %>" rel="contact"><img alt="<%= h user.name %>" class="photo fn" height="48" src="<%= h user.avatar.url %>" width="48" /></a>
   </td>
   <td>
 

@@ -1,12 +1,13 @@
 class StatusesController < ApplicationController
   TWEETS_PER_PAGE = 50
   before_filter :authenticateUser, :except => [:show]
+  before_filter :find_user
   
   # We don't want to protect search from forgery, cos, well, it's not that important
   protect_from_forgery :except => :search
 
   def replies
-    @tweets = @user.replies.find(:all, :include => :user,:limit => 25)
+    @tweets = Tweet.mentions(@user).find(:all, :include => :user,:limit => 25)
     render_tweets
   end
 
@@ -15,7 +16,6 @@ class StatusesController < ApplicationController
   end
 
   def friends_timeline
-    logger.info "request=#{@user}"
     @page = params[:page].nil? ? 1 : params[:page].to_i
     from = (@page - 1 ) * TWEETS_PER_PAGE
     to = TWEETS_PER_PAGE + from + 1
@@ -101,13 +101,12 @@ class StatusesController < ApplicationController
       recipient_name = $1
       tweet = $2
       recipient = User.fetch(recipient_name)
-    elsif (tweet=~/^@(\S+) /)
+    elsif params['in_reply_to_status_id']
       type="reply"
-      recipient_name = $1
-      recipient = User.fetch(recipient_name)
+      in_reply_to_status = Tweet.find_by_id(params['in_reply_to_status_id'])
     end
       
-    @tweet = Tweet.create({:tweet => tweet, :user => @user, :recipient => recipient, :tweet_type => type, :source => params[:source] || 'web'})
+    @tweet = Tweet.create({:tweet => tweet, :user => @user, :recipient => recipient, :in_reply_to_status => in_reply_to_status, :tweet_type => type, :source => params[:source] || 'web'})
     if (params['twttr'])
         latest_status = render_to_string :partial => "latest", :object=> @tweet
         ret = {"status_count"=>@user.public_tweets.count, "latest_status"=> latest_status,"text"=>tweet}
@@ -117,4 +116,10 @@ class StatusesController < ApplicationController
         render_tweet
     end
   end
+  
+  private
+  
+    def find_user
+      @user = User.find_by_username(params[:username]) if params[:username]
+    end
 end

@@ -1,7 +1,15 @@
 class Tweet < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipient, :class_name => "User"
-    
+  belongs_to :in_reply_to_status, :class_name => "Tweet"
+
+  named_scope :replies, :conditions => {:tweet_type => 'reply'}
+
+  named_scope :mentions, lambda{|user| {
+    :conditions => [%Q{tweet_type IN ('tweet','reply') AND tweet LIKE ?}, "%@#{user.username}%"],
+    :order => 'created_at DESC'
+  } }
+
   def created_at_formatted
     self.created_at.gmtime.strftime("%a %b %d %H:%M:%S +0000 %Y")
   end
@@ -15,14 +23,14 @@ class Tweet < ActiveRecord::Base
        :created_at=>created_at_formatted, 
        :sender_screen_name=>user.username, 
        :recipient_screen_name=>recipient.username,
-       :sender=>user.to_map(),
+       :sender=>user.to_map,
        :recipient=>recipient.to_map()}
     else
       ret = {:truncated=>false,
        :favorited=>false,
-       :in_reply_to_status_id=>nil,
+       :in_reply_to_status_id=>in_reply_to_status_id,
        :created_at=> created_at_formatted, #Sun Nov 23 09:19:13 +0000 2008"
-       :in_reply_to_user_id=>(recipient_id ? recipient_id : nil),
+       :in_reply_to_user_id=>recipient_id,
        :id=>id,
        :source=>source,
        :text=>tweet}

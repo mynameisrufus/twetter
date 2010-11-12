@@ -1,11 +1,4 @@
-<% setup(:body_id=>"new", :body_classes=>"sessions", :css=>['screen']) %>
-
-<h2>Sign in to Twetter</h2>
-
-<p>Twetter is an offline version of Twitter.com designed to be used in camp situations where networking
-is available but not Internet.  It is compatible with many third party Twitter notification programs like Twitteriffic,
-Twitterfox etc.</p>
-
+<% setup(:body_id=>"new", :body_classes=>"sessions") %>
 
 <% form_tag session_path, :class=>'signin' do -%>
 
@@ -43,21 +36,19 @@ Twitterfox etc.</p>
 <% content_for :sidebar do %>
     <div class="section">
         <div class="section-header">
-
             <h1>First Time?</h1>
         </div>
-        <div class="join">
-            <p class="complete">
-                You do not need to sign up to use Twetter.  Just login with any username and password and an
-                account will be created for you if the username does not already exist.  You may find that
-                your 3rd party Twitter client has already logged in with your standard Twitter credentials.
-            </p>
-        </div>
+        <p class="complete">
+          Use your regular Twitter username, and on your first login, enter any password you like. Any questions, ask <a href="/ben_h">@ben_h</a>.
+        </p>
+        <p class="complete">
+          If you can't log in, maybe your Twitter client has already logged you in with your normal password. (Don't worry, they're hashed!)
+        </p>
     </div>
 
 <% end %>
 
 <% content_for :javascript do %>
-    $('#username').focus();
+    $('#login').focus();
 <% end %>
 

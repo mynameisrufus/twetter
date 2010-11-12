@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090513063838) do
+ActiveRecord::Schema.define(:version => 20100412042558) do
 
   create_table "favorites", :id => false, :force => true do |t|
     t.integer "user_id",  :null => false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20090513063838) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "in_reply_to_status_id"
   end
 
   create_table "users", :force => true do |t|
@@ -45,6 +46,10 @@ ActiveRecord::Schema.define(:version => 20090513063838) do
     t.datetime "remember_token_expires_at"
     t.string   "bio"
     t.string   "location"
+    t.string   "avatar_file_name"
+    t.integer  "avatar_file_size"
+    t.string   "avatar_content_type"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true

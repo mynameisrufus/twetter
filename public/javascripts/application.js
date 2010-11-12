@@ -150,8 +150,8 @@ $.fn.isUpdateForm = function() {
                     B.html(_("Reply to %{screen_name}:", {screen_name:J[1]}));
                     A.val(_("reply"))
                 } else {
-                    B.html(_("What are you doing?"));
-                    A.val(_("update"))
+                    B.html(_("What's happening?"));
+                    A.val(_("Tweet"))
                 }
             }
         }
@@ -302,7 +302,7 @@ $.fn.isCurrentStatus = function(A) {
             $("#latest_text_full, #latest_text").toggle()
         });
         B.css("visibility", "hidden");
-        twttr.boxTruncate($("#latest_text_full .status-text").text(), "#currently #latest_text .status-text", "#currently #latest_text", {height:40,minlength:60});
+        // twttr.boxTruncate($("#latest_text_full .status-text").text(), "#currently #latest_text .status-text", "#currently #latest_text", {height:40,minlength:60});
         B.css("visibility", "visible");
         if (A) {
             if (C.css("visibility") == "hidden") {
