@@ -1,28 +1,21 @@
-ActionController::Routing::Routes.draw do |map|
+Twetter::Application.routes.draw do
 
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.login '/login', :controller => 'sessions', :action => 'new'
-  map.resource :session
-  map.root :controller =>"statuses", :action => "friends_timeline"
-  map.connect "/home" , :controller => "statuses" ,:action => "friends_timeline"
-  map.connect "/replies", :controller => "statuses",:action => "replies" 
-  map.connect "/friends", :controller => "statuses",:action => "friends"
-  map.connect "/followers", :controller => "statuses",:action => "followers"
-  map.connect "/search", :controller => "statuses",:action => "search"
-  map.connect "/statistics", :controller => "statuses",:action => "statistics"
-  map.connect "/public_timeline", :controller => "statuses",:action => "public_timeline"
+  match '/logout' => 'sessions#destroy', as: 'logout'
+  match '/login' => 'sessions#new', as: 'login'
+  resource :session
 
-  map.connect "/statuses/public_timeline.:format", :controller => "statuses", :action => "friends_timeline"
-  map.connect "/status/update", :controller => "statuses", :action=> "update"
+  match '/home' => 'statuses#friends_timeline'
+  match '/replies' => 'statuses#replies'
+  match '/friends' => 'statuses#friends'
+  match '/followers' => 'statuses#followers'
+  match '/search' => 'statuses#search'
+  match '/statistics' => 'statuses#statistics'
+  match '/public_timeline' => 'statuses#public_timeline'
 
-  # See how all your routes lay out with "rake routes"
+  match '/statuses/public_timeline.:format' => 'statuses#friends_timeline'
+  match '/status/update' => 'statuses#update'
 
-  # Install the default routes as the lowest priority.
-  map.connect ':controller.:format'
-  map.connect ':controller/:action.:format'
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  match '/:username/status/:id' => 'statuses#show', as: 'user_status'
+  match '/:username' => 'user#show', as: 'user'
 
-  map.user_status '/:username/status/:id', :controller => 'statuses', :action => 'show'
-  map.user '/:username', :controller => 'user', :action => 'show'
 end
