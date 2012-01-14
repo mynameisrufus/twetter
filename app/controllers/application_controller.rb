@@ -5,12 +5,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
 
-  before_filter :show_params
-
-  def show_params
-    logger.info params.inspect
-  end
-
   private
 
   def current_domain
