@@ -11,7 +11,7 @@
 
 <p><img alt="<%= @duser.username %>" src="<%= @duser.avatar.url %>" /></p>
 
-<% if (@user == @duser) %>
+<% if (current_user == @duser) %>
 <p><small><a href="/account/picture">Change this?</a></small></p>
 <% end %>
                 </div>

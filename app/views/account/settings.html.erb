@@ -10,7 +10,7 @@
             <tr>
                 <th><label for="user_name">Name:</label></th>
                 <td>
-                    <input id="user_name" maxlength="20" name="user[name]" size="20" type="text" value="<%= h @user.name %>"/>
+                    <input id="user_name" maxlength="20" name="user[name]" size="20" type="text" value="<%= h current_user.name %>"/>
                     <br/>
                     <small>Enter your real name, so people you know can recognize you.</small>
 
@@ -19,10 +19,10 @@
             <tr>
                 <th><label for="user_screen_name">Username:</label></th>
                 <td>
-                    <input class="requires-auth" id="user_screen_name" maxlength="15" name="user[username]" size="15" type="text" value="<%= h @user.username %>"/>
+                    <input class="requires-auth" id="user_screen_name" maxlength="15" name="user[username]" size="15" type="text" value="<%= h current_user.username %>"/>
 
                     <p>
-                        <small>Your URL: <%= current_domain %>/<span id="username_url"><%= h @user.username %></span>
+                        <small>Your URL: <%= current_domain %>/<span id="username_url"><%= h current_user.username %></span>
                         </small>
                         <br/>
 
@@ -35,7 +35,7 @@
                 <th><label for="user_description">One Line Bio:</label></th>
 
                 <td>
-                    <input id="user_description" maxlength="160" name="user[bio]" size="30" type="text" value="<%= h @user.bio %>"/>
+                    <input id="user_description" maxlength="160" name="user[bio]" size="30" type="text" value="<%= h current_user.bio %>"/>
 
                     <p>
                         <small>About yourself in fewer than 160 chars.</small>
@@ -46,7 +46,7 @@
                 <th><label for="user_location">Home Location:</label></th>
                 <td>
 
-                    <input id="user_location" name="user[location]" size="30" type="text" value="<%= h @user.location %>"/>
+                    <input id="user_location" name="user[location]" size="30" type="text" value="<%= h current_user.location %>"/>
 
                     <p>
                         <small>Where in the world are you from?</small>

@@ -3,5 +3,5 @@
 <h2><%= h @duser.name %> follows <%= @duser.friends_count %> people.</h2>
 
 <table class="doing" cellspacing="0">
-      <%= render :partial=>'user/user', :collection=>@users %>
+      <%= render :partial=>'user/user', :collection=>current_users %>
 </table>

@@ -2,21 +2,21 @@
 
     <div id="profile" class="section">
         <div class="user_icon">
-            <a href="/<%= h @user.username %>" class="url" rel="contact" title="<%= h @user.name %>"><img alt="<%= h @user.name %>" class="side_thumb photo fn" height="73" src="<%= @user.avatar.url %>" width="73"/></a>
+            <a href="/<%= h current_user.username %>" class="url" rel="contact" title="<%= h current_user.name %>"><img alt="<%= h current_user.name %>" class="side_thumb photo fn" height="73" src="<%= current_user.avatar.url %>" width="73"/></a>
 
-            <span id="me_name"><%= h @user.username %></span>
-            <span id="me_tweets"><span id="update_count"><%= @user.tweets.count %></span> tweets</span>
+            <span id="me_name"><%= h current_user.username %></span>
+            <span id="me_tweets"><span id="update_count"><%= current_user.tweets.count %></span> tweets</span>
 
         </div>
 
-        <%= render :partial=>'user/user_stats', :object=> @user %>
-        <%= render :partial=>'user/promotion', :object => promotions.rand %>
+        <%= render :partial=>'user/user_stats', :object=> current_user %>
+        <%= render :partial=>'user/promotion', :object => promotions.sample %>
     </div>
 
     <ul id="primary_nav" class="sidebar-menu">
       <%= sidebar_tab 'home', 'Home' %>
-      <%= sidebar_tab 'replies', %Q{<span id="message_count" class="stat_count">#{@user.mentions.count}</span> @#{@user.username}} %>
-      <%= sidebar_tab 'direct_messages', %Q{<span id="message_count" class="stat_count">#{@user.direct_messages_received.count}</span> Direct Messages} %>
+      <%= sidebar_tab 'replies', %Q{<span id="message_count" class="stat_count">#{current_user.mentions.count}</span> @#{current_user.username}} %>
+      <%= sidebar_tab 'direct_messages', %Q{<span id="message_count" class="stat_count">#{current_user.direct_messages_received.count}</span> Direct Messages} %>
       <%= sidebar_tab 'search', 'Search' %>
       <%= sidebar_tab 'favorites', 'Favorites' %>
       <%= sidebar_tab 'public_timeline', 'Everyone' %>
@@ -34,10 +34,10 @@
 
         <div id="friends">
 
-            <%= render :partial=>'user/friend', :collection=>@user.friends[0..35] %>
+            <%= render :partial=>'user/friend', :collection=>current_user.friends[0..35] %>
 
         </div>
-        <% if (@user.friends_count > 36) %>
+        <% if (current_user.friends_count > 36) %>
         <div id="friends_view_all"><a href="/friends" rel="me">View All&hellip;</a></div>
         <% end %>
 

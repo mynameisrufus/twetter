@@ -7,7 +7,7 @@
 
     <div class="clear"></div>
     <div id="follow_actions_<%= @duser.id %>" class="follow-actions <%= @duser.username %>">
-        <% if (@duser != @user) %>
+        <% if (@duser != current_user) %>
             <div class="follow-control">
                 <div id="follow-toggle" class="closed med-btn">
 

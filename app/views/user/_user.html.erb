@@ -15,7 +15,7 @@
 
 
         <span id="removed<%= h user.id %>"></span>
-        <% if (user != @user) %>
+        <% if (user != current_user) %>
         <div  id="control<%= h user.id %>">
 
             <img src="/images/yes.gif" alt="following" class="follow-icon" />You are following <%= h user.username %>            <span id="notifications14292159" style="display:none;font-size:90%">

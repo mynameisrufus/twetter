@@ -11,14 +11,14 @@
   <meta content="4FTTxY4uvo0RZTMQqIyhh18HsepyJOctQ+XTOu1zsfE=" name="verify-v1"/>
   <meta content="1" name="page"/>
   <meta content="IE=EmulateIE7" name="X-UA-Compatible"/>
-  <meta content="<%= @user ? "y" : "n" %>" name="session-loggedin"/>
+  <meta content="<%= current_user ? "y" : "n" %>" name="session-loggedin"/>
 
-  <% if @user %>
-    <meta content="<%= @user.id %>" name="session-userid"/>
-    <meta content="<%= @user.username %>" name="session-user-screen_name"/>
+  <% if current_user %>
+    <meta content="<%= current_user.id %>" name="session-userid"/>
+    <meta content="<%= current_user.username %>" name="session-user-screen_name"/>
   <% end %>
-  <% if @user || @duser %>
-    <meta content="<%= (@duser || @user).username %>" name="page-user-screen_name"/>
+  <% if current_user || @duser %>
+    <meta content="<%= (@duser || current_user).username %>" name="page-user-screen_name"/>
   <% end %>
   <title><%= @title %></title>
   <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>

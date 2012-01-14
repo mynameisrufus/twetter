@@ -1,6 +1,6 @@
-<% fav = !@user.nil? && !@user.favorite_tweets.find_by_id(tweet.id).nil? %>
+<% fav = !current_user.nil? && !current_user.favorite_tweets.find_by_id(tweet.id).nil? %>
 
-<li class="hentry status <% fav ? "favorite" : "" -%>u-<%= h tweet.user.username -%><%= (!@user.nil? && (tweet.user==@user)) ? " mine" : "" -%><%= ((type=='mine' && tweet_counter==0) || type=='friends_update') ? " latest-status":"" %>" id="status_<%= h tweet.id -%>">
+<li class="hentry status <% fav ? "favorite" : "" -%>u-<%= h tweet.user.username -%><%= (!current_user.nil? && (tweet.user==current_user)) ? " mine" : "" -%><%= ((type=='mine' && tweet_counter==0) || type=='friends_update') ? " latest-status":"" %>" id="status_<%= h tweet.id -%>">
     <% if (type!='mine') %>
     <span class="thumb vcard author">
         <a href="/<%= h tweet.user.username %>" class="url">

@@ -8,7 +8,7 @@
 
                     Send <select id="direct_message_user_id" name="user[id]">
                     <option value="" selected="selected"></option>
-                    <% @user.friends.each do |user| %>
+                    <% current_user.friends.each do |user| %>
                         <option value="<%= user.id %>"><%= h user.username %></option>
                     <% end %>
                 </select> a direct message.

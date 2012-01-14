@@ -21,11 +21,11 @@
                 <input type="submit" name="update" value="Tweet" id="update-submit" class="status-btn round-btn"/>
             </div>
 
-            <% if (!@user.latest_tweet.nil?) %>
+            <% if (!current_user.latest_tweet.nil?) %>
             <div id="currently">
       <div id="update_notifications">
         <span id="latest_status">
-            <%= render :partial=>'statuses/latest', :object=>@user.latest_tweet %>
+            <%= render :partial=>'statuses/latest', :object=>current_user.latest_tweet %>
         </span>
       </div>
             </div>
