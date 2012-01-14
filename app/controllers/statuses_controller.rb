@@ -1,6 +1,5 @@
 class StatusesController < ApplicationController
   TWEETS_PER_PAGE = 50
-  before_filter :authenticateUser, :except => [:show]
   before_filter :find_user
   
   # We don't want to protect search from forgery, cos, well, it's not that important

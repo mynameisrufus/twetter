@@ -1,6 +1,4 @@
 class FavoritesController < ApplicationController
-  before_filter :authenticateUser
-
   def index
     @tweets = @user.favorite_tweets
     render_tweets

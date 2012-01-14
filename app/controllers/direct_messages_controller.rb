@@ -1,6 +1,4 @@
 class DirectMessagesController < ApplicationController
-  before_filter :authenticateUser
-
   def index
     @tweets = @user.direct_messages_received.find(:all, :include => :user,:limit => 25)
     render_tweets('direct_messages')

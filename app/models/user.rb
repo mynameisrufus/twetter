@@ -1,59 +1,19 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  include Authentication
-  include Authentication::ByPassword
-  include Authentication::ByCookieToken
-  
+
   has_attached_file :avatar
 
   has_many :tweets
-    has_many :direct_messages_received, :class_name=>'Tweet', :foreign_key=>'recipient_id', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
-    has_many :direct_messages_sent, :class_name=>'Tweet', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
-    has_many :public_tweets, :class_name=>'Tweet', :conditions=>"tweet_type!='direct'", :order=>"tweets.created_at DESC"
+  has_many :direct_messages_received, :class_name=>'Tweet', :foreign_key=>'recipient_id', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
+  has_many :direct_messages_sent, :class_name=>'Tweet', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
+  has_many :public_tweets, :class_name=>'Tweet', :conditions=>"tweet_type!='direct'", :order=>"tweets.created_at DESC"
 
-    has_many :favorites
-    has_many :favorite_tweets, :source=>:tweet, :through=>:favorites, :order => "created_at DESC"
+  has_many :favorites
+  has_many :favorite_tweets, :source=>:tweet, :through=>:favorites, :order => "created_at DESC"
 
   validates_presence_of     :username
-  validates_length_of       :username,    :within => 3..40
   validates_uniqueness_of   :username
-  validates_format_of       :username,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
-
-  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
-  validates_length_of       :name,     :maximum => 100
-
-
-  # HACK HACK HACK -- how to do attr_accessible from here?
-  # prevents a user from submitting a crafted form that bypasses activation
-  # anything else you want your user to change should be added here.
-  attr_accessible :username, :name, :password, :password_confirmation, :bio, :location
-
-
-
-  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  #
-  # uff.  this is really an authorization, not authentication routine.  
-  # We really need a Dispatch Chain here or something.
-  # This will also let us return a human error message.
-  #
-  def self.authenticate(login, password)
-     u = fetch(login)
-     if (!u.crypted_password)
-         u.password = password
-         return u.save ? u : nil
-     end
-     u.authenticated?(password) ? u : nil
-  end
-
-  def self.fetch(username)
-    find_or_create_by_username(username.downcase)
-  end
-  
-  def password_required?
-      false
-  end
-
 
   def username=(value)
     write_attribute :username, (value ? value.downcase : nil)

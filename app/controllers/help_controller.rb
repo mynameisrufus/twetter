@@ -1,6 +1,4 @@
 class HelpController < ApplicationController
-  before_filter :authenticateUser
-
   def test
     respond_to do |format|
       format.xml { render :xml=>"<ok>true</ok>"}

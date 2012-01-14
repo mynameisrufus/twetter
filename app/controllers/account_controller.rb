@@ -1,6 +1,4 @@
 class AccountController < ApplicationController
-  before_filter :authenticateUser, :except=>[:front, :login, :end_session]
-
   def index
     @tweets = @user.public_tweets.find(:all, :include => :user, :limit => 20  )
   end

@@ -2,8 +2,6 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  include AuthenticatedSystem
-
   protect_from_forgery
   helper :all
 
@@ -14,13 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def authenticateUser
-    login_via_oauth
-    x = login_required
-    @user = current_user
-    x
-  end
 
   def current_domain
     "http://#{request.host}"

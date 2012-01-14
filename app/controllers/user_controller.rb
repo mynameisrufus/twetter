@@ -1,5 +1,4 @@
 class UserController < ApplicationController
-  before_filter :authenticateUser, :except => [:show]
   before_filter :lookup_duser
   
   def show
