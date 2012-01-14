@@ -4,31 +4,19 @@
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
 
-  filter_parameter_logging :password  
+  protect_from_forgery
+  helper :all
 
-  helper :all # include all helpers, all the time
-
-  # See ActionController::RequestForgeryProtection for details
-  # Uncomment the :secret if you're not using the cookie session store
-  protect_from_forgery # :secret => 'd76bfab6484e6b4abc452cd92dd122d1'
-  
-  # See ActionController::Base for details 
-  # Uncomment this to filter the contents of submitted sensitive data parameters
-  # from your application log (in this case, all fields with names like "password"). 
-  # filter_parameter_logging :password
-  
   before_filter :show_params
-  
+
   def show_params
     logger.info params.inspect
   end
+
   private
-  def verify_authenticity_token
-    return true
-  end
 
   def authenticateUser
-    login_via_oauth()
+    login_via_oauth
     x = login_required
     @user = current_user
     x
@@ -38,8 +26,6 @@ class ApplicationController < ActionController::Base
     "http://#{request.host}"
   end
   helper_method :current_domain
-
-  private
 
   def login_via_oauth
     auth = request.headers['Authorization']
@@ -87,5 +73,5 @@ class ApplicationController < ActionController::Base
       format.json { render :json => @tweet.to_map }
     end
   end
-  
+
 end
