@@ -4,10 +4,10 @@ working_directory '.'
 preload_app true
 timeout 60
 
-listen "/Users/ben/code/twetter/tmp/sockets/unicorn.socket", :backlog => 64
-pid "/Users/ben/code/twetter/tmp/pids/unicorn.pid"
-stderr_path "/Users/ben/code/twetter/log/unicorn.stderr.log"
-stdout_path "/Users/ben/code/twetter/log/unicorn.stdout.log"
+listen "/Users/twetter/current/tmp/sockets/unicorn.socket", :backlog => 64
+pid "/Users/twetter/current/tmp/pids/unicorn.pid"
+stderr_path "/Users/twetter/current/log/unicorn.stderr.log"
+stdout_path "/Users/twetter/current/log/unicorn.stdout.log"
 
 before_fork do |server, worker|
   begin
