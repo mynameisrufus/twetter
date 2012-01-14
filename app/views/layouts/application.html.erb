@@ -297,11 +297,11 @@
   <script src="/javascripts/twitter.js" type="text/javascript"></script>
   <script src="/javascripts/application.js" type="text/javascript"></script>
   <script src="/javascripts/jquery.livequery.js" type="text/javascript"></script>
-  <% if flash[:error] || flash[:notice] %>
+  <% if alert || notice %>
   <script type="text/javascript">
     function showFlashNotice() {
       var notification = new InfoNotification();
-      notification.setMessage("<%= flash[:error] || flash[:notice] %>");
+      notification.setMessage("<%= alert || notice %>");
       notification.show();
     }
     if (window.attachEvent) {
