@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(:version => 20120114114036) do
     t.string   "username",            :limit => 40
     t.string   "name",                :limit => 100, :default => ""
     t.string   "email",               :limit => 100
-    t.string   "encrypted_password",  :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "bio"
@@ -49,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120114114036) do
     t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.datetime "avatar_updated_at"
+    t.string   "encrypted_password",                 :default => "", :null => false
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true

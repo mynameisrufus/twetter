@@ -18,6 +18,19 @@ class User < ActiveRecord::Base
   validates_presence_of     :username
   validates_uniqueness_of   :username
 
+  def self.find_for_authentication conditions
+    where(username: conditions[:email]).first
+  end
+
+  def valid_password? password
+    if encrypted_password.blank?
+      self.password = password
+      save!
+    else
+      super
+    end
+  end
+
   def username=(value)
     write_attribute :username, (value ? value.downcase : nil)
   end
