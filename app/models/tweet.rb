@@ -3,12 +3,12 @@ class Tweet < ActiveRecord::Base
   belongs_to :recipient, :class_name => "User"
   belongs_to :in_reply_to_status, :class_name => "Tweet"
 
-  def replies
+  def self.replies
     where(tweet_type: 'reply')
   end
 
-  def mentions user
-    where('tweet_type IN ?', %w[tweet reply]).
+  def self.mentions user
+    where('tweet_type IN (?)', %w[tweet reply]).
     where('tweet LIKE ?', "%@#{user.username}%").
     order('created_at DESC')
   end
