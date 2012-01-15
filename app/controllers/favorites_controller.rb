@@ -1,20 +1,15 @@
 class FavoritesController < ApplicationController
   def index
-    @tweets = @user.favorite_tweets
-    render_tweets
+    @tweets = current_user.favorite_tweets
   end
 
   def create
-    @tweet = Tweet.find(params[:id])
-    @user.favorite_tweets << @tweet
-    render :text=>"OK"
+    current_user.favorite_tweets << Tweet.find(params[:id])
+    render nothing: true
   end
 
   def destroy
-    @tweet = Tweet.find(params[:id])
-    if (@tweet)
-      @user.favorite_tweets.delete(@tweet)
-      render :text=>"OK"
-    end
+    current_user.favorite_tweets.find(params[:id]).destroy
+    render nothing: true
   end
 end

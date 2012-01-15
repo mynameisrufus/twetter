@@ -18,6 +18,7 @@ Twetter::Application.routes.draw do
   end
 
   match '/search' => 'statuses#search'
+  match '/favorites' => 'favorites#index'
 
   match '/:username/status/:id' => 'statuses#show', as: 'user_status'
   match '/:username' => 'users#show', as: 'user'
