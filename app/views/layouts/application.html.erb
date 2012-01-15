@@ -279,13 +279,8 @@
               <li><a href="/account/settings" id="settings_link">Settings</a></li>
               <!--<li><a href="http://help.twitter.com" id="help_link">Help</a></li>-->
               <li class="last">
-                  <a id="sign_out_link" href="#" onclick="document.getElementById('sign_out_form').submit(); return false;">Sign
-                      out</a></li>
-
-              <form method="post" id="sign_out_form" action="/sessions/destroy" style="display:none;">
-                  <input name="authenticity_token" value="42114f58c6f3824dc51197223d6e1fb9b1d184a7" type="hidden"/>
-              </form>
-
+                  <%= link_to 'Sign out', destroy_user_session_path %>
+              </li>
           </ul>
       </div>
 
