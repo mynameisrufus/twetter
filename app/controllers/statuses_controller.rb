@@ -112,7 +112,7 @@ class StatusesController < ApplicationController
         ret["status_li"] = render_to_string :partial => "tweet", :object=> @tweet, :locals=>{:type=>'friends_update'}
         render :json => ret
     else
-        render_tweet
+      render partial: 'statuses/tweet', locals: {tweet: @tweet, type: type}
     end
   end
   
