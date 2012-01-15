@@ -1,4 +1,1 @@
-<% setup(:title=>"Public Timeline", :body_id=>"public_timeline", :refresh=>"30", :body_classes=>"status replyable") %>
-<%= render :partial => "statuses/update" %>
-<%= render :partial => "statuses/tweets" %>
-<%= render :partial => "statuses/sidebar" %>
+<%= render template: "statuses/friends_timeline" %>
