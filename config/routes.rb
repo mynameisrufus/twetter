@@ -17,6 +17,8 @@ Twetter::Application.routes.draw do
     root to: 'statuses#friends_timeline'
   end
 
+  match '/direct_messages' => 'direct_messages#index'
+  match '/direct_messages/sent' => 'direct_messages#sent'
   match '/search' => 'statuses#search'
   match '/favorites' => 'favorites#index'
 

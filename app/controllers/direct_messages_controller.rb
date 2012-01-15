@@ -1,12 +1,10 @@
 class DirectMessagesController < ApplicationController
   def index
-    @tweets = @user.direct_messages_received.find(:all, :include => :user,:limit => 25)
-    render_tweets('direct_messages')
+    @tweets = current_user.direct_messages_received.includes(:user).limit(25)
   end
   
   def sent
-    @tweets = @user.direct_messages_sent.find(:all, :include => :user,:limit => 25)
-    render_tweets('direct_messages')
+    @tweets = current_user.direct_messages_sent.includes(:user).limit(25)
   end    
 
   def create
