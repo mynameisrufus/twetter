@@ -33,5 +33,29 @@
 </form>
 
 <% content_for :javascript do %>
-    $('#doingForm').isUpdateForm();
+  $('form.status-update-form').submit(function() {
+    try {
+      $.ajax({
+        url: '/status/update',
+        type: 'POST',
+        data: {
+          'status': $('#status').val(),
+          'authenticity_token': $('meta[name=csrf-token]').attr('content')
+        },
+        before: function() {
+          $("#loader").fadeIn(200);
+        }
+      }).done(function(data) {
+        $('ol.statuses').prepend($(data)).children().first().hide().slideDown();
+      }).always(function() {
+        console.log('lol');
+        $("#loader").fadeOut(200);
+      });
+      return false;
+    } catch (ex) {
+      alert('wtf');
+      console.log(ex);
+      return false;
+    }
+  });
 <% end %>
