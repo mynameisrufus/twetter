@@ -105,7 +105,7 @@ class StatusesController < ApplicationController
       in_reply_to_status = Tweet.find_by_id(params['in_reply_to_status_id'])
     end
       
-    @tweet = Tweet.create({:tweet => tweet, :user => @user, :recipient => recipient, :in_reply_to_status => in_reply_to_status, :tweet_type => type, :source => params[:source] || 'web'})
+    @tweet = Tweet.create(:tweet => tweet, :user_id => current_user.id, :recipient => recipient, :in_reply_to_status => in_reply_to_status, :tweet_type => type, :source => params[:source] || 'web')
     if (params['twttr'])
         latest_status = render_to_string :partial => "latest", :object=> @tweet
         ret = {"status_count"=>@user.public_tweets.count, "latest_status"=> latest_status,"text"=>tweet}
