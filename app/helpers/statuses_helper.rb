@@ -3,11 +3,11 @@ module StatusesHelper
       user_status_path :username => tweet.user.username, :id => tweet.id
     end
 
-    def sidebar_tab name, contents, opts = {}
+    def sidebar_tab name, contents = nil, opts = {}
       url = "#{opts[:prefix]}/#{name}"
       content_tag :li, :id => "#{name}_#{opts[:suffix] || 'tab'}", :class => ('active' if current_page?(url)) do
         content_tag :a, :class => 'in-page-link', :href => url do
-          contents
+          block_given? ? yield : html_escape(contents)
         end
       end
     end
