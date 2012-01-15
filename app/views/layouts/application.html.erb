@@ -12,6 +12,7 @@
   <meta content="1" name="page"/>
   <meta content="IE=EmulateIE7" name="X-UA-Compatible"/>
   <meta content="<%= current_user ? "y" : "n" %>" name="session-loggedin"/>
+  <%= csrf_meta_tag %>
 
   <% if current_user %>
     <meta content="<%= current_user.id %>" name="session-userid"/>
@@ -308,7 +309,6 @@
   <% end %>
   <script type="text/javascript">
       //<![CDATA[
-      twttr.form_authenticity_token = '42114f58c6f3824dc51197223d6e1fb9b1d184a7';
       if (window.top !== window.self) { setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
 
       $( function () {
