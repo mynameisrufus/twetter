@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def _default_layout require_layout = false
+    request.xhr? ? nil : 'application'
+  end
+
 end
