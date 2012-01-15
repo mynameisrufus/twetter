@@ -1,6 +1,6 @@
 <p class="promotion round">
   <a href="<%= request.path %>" class="definition">
-    <strong><%= promotion[:name] %></strong>
+    <strong><%= promotion[:name].html_safe %></strong>
     <em><%= promotion[:part] %></em>
     <%= promotion[:text] %>
   </a>
