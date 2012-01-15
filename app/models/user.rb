@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :username
 
   def self.find_for_authentication conditions
-    where(conditions).first
+    find_or_create_by_username(conditions[:username])
   end
 
   def valid_password? password
