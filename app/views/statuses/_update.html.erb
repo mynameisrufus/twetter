@@ -47,8 +47,8 @@
         }
       }).done(function(data) {
         $('ol.statuses').prepend($(data)).children().first().hide().slideDown();
+        $('#status, #in_reply_to_status_id').val('');
       }).always(function() {
-        console.log('lol');
         $("#loader").fadeOut(200);
       });
       return false;
