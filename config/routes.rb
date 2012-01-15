@@ -17,9 +17,9 @@ Twetter::Application.routes.draw do
     root to: 'statuses#friends_timeline'
   end
 
+  match '/search' => 'statuses#search'
+
   match '/:username/status/:id' => 'statuses#show', as: 'user_status'
   match '/:username' => 'users#show', as: 'user'
-
-  match '/search' => 'statuses#search'
 
 end
