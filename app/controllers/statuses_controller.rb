@@ -1,13 +1,11 @@
 class StatusesController < ApplicationController
   TWEETS_PER_PAGE = 50
-  before_filter :find_user
   
   # We don't want to protect search from forgery, cos, well, it's not that important
   protect_from_forgery :except => :search
 
   def replies
     @tweets = Tweet.mentions(@user).find(:all, :include => :user,:limit => 25)
-    render_tweets
   end
 
   def public_timeline
@@ -30,8 +28,6 @@ class StatusesController < ApplicationController
     
     @more_pages = (@tweets.length > TWEETS_PER_PAGE)
     @tweets = @tweets[0, TWEETS_PER_PAGE]
-
-    render_tweets
   end
 
   def search
@@ -62,7 +58,6 @@ class StatusesController < ApplicationController
         @max_results = TWEETS_PER_PAGE
       end
     end
-    render_tweets
   end
 
   def statistics
@@ -74,12 +69,10 @@ class StatusesController < ApplicationController
   def user_timeline
     limit = params[:all] ? 100000000000 : 25
     @tweets = @user.public_tweets.find(:all,:include => :user,:limit => limit)
-    render_tweets
   end
   
   def followers
     @users=@user.followers
-    render_users
   end
   
   def friends
@@ -89,7 +82,6 @@ class StatusesController < ApplicationController
   
   def show
     @tweet = Tweet.find(params[:id])
-    render_tweet
   end
   
   def update
@@ -115,10 +107,4 @@ class StatusesController < ApplicationController
       render partial: 'statuses/tweet', locals: {tweet: @tweet, type: type}
     end
   end
-  
-  private
-  
-    def find_user
-      @user = User.find_by_username(params[:username]) if params[:username]
-    end
 end
