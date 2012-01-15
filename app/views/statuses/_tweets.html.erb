@@ -18,8 +18,14 @@
 <% content_for :javascript do %>
   $('span.reply a').click(function() {
     var status = $(this).parents('li.status');
+    var name = '@' + status.data('username');
     $('input#in_reply_to_status_id').val(status.data('status-id'));
-    $('textarea#status').val('@' + status.data('username') + ' ').focus();
+
+    if (!$('textarea#status').val().match(name)) {
+      $('textarea#status').val(name + ' ' + $('textarea#status').val());
+    }
+    $('textarea#status').focus();
+
     setCaretToPos(document.getElementById('status'), $('textarea#status').val().length);
     return false;
   });
