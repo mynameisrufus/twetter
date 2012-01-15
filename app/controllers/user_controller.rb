@@ -1,9 +1,4 @@
 class UserController < ApplicationController
-  before_filter :lookup_duser
-  
-  def show
-    @tweets = @duser.public_tweets.find(:all,:include => :user,:limit => 20  )
-  end
 
   def favourites
     @tweets = @duser.favorite_tweets
@@ -19,9 +14,4 @@ class UserController < ApplicationController
     redirect_to(:controller=>'statuses', :action=>'followers') if (@user==@duser)
   end
 
-  private
-
-  def lookup_duser
-    @duser = User.fetch(params[:username])
-  end
 end
