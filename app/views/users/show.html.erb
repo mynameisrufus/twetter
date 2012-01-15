@@ -1,13 +1,13 @@
-<% setup(:title=>@duser.username, :body_id=>"profile") %>
+<% setup(:title=>user.username, :body_id=>"profile") %>
 <div class="profile-head">
     <h2 class="thumb clearfix">
         <!-- <img alt="Default_profile_bigger" height="73" src="/images/default_profile_bigger.png" width="73" /> -->
-        <%= @duser.username %>
+        <%= user.username %>
     </h2>
 
     <div class="clear"></div>
-    <div id="follow_actions_<%= @duser.id %>" class="follow-actions <%= @duser.username %>">
-        <% if (@duser != current_user) %>
+    <div id="follow_actions_<%= user.id %>" class="follow-actions <%= user.username %>">
+        <% if (user != current_user) %>
             <div class="follow-control">
                 <div id="follow-toggle" class="closed med-btn">
 
@@ -16,10 +16,10 @@
 
                 <div id="follow-details">
                     <p id="following">
-                        <strong>You follow <%= h @duser.username %></strong>
+                        <strong>You follow <%= h user.username %></strong>
                         <input type="button" id="remove_button" class="remove-button" value="Remove"/>
                         <br/>
-                                <span class="desc"><%= h @duser.username %>
+                                <span class="desc"><%= h user.username %>
                                     's updates appear in your <a href="/home">timeline</a>.</span>
                     </p>
 
@@ -46,7 +46,7 @@
     <!--</div>-->
 </div>
 
-<%= render :partial=>'user/sidebar' %>
+<%= render partial: 'sidebar', locals: {user: user} %>
 
 <% content_for :javascript do %>
     $('body#profile ul#tabMenu li a#updates_tab, body#favourings ul#tabMenu li a#favorites_tab').isSidebarTab();

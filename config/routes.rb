@@ -18,7 +18,7 @@ Twetter::Application.routes.draw do
   end
 
   match '/:username/status/:id' => 'statuses#show', as: 'user_status'
-  match '/:username' => 'user#show', as: 'user'
+  match '/:username' => 'users#show', as: 'user'
 
   match '/search' => 'statuses#search'
 
