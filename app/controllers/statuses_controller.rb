@@ -99,10 +99,10 @@ class StatusesController < ApplicationController
       
     @tweet = Tweet.create(:tweet => tweet, :user_id => current_user.id, :recipient => recipient, :in_reply_to_status => in_reply_to_status, :tweet_type => type, :source => params[:source] || 'web')
     if (params['twttr'])
-        latest_status = render_to_string :partial => "latest", :object=> @tweet
-        ret = {"status_count"=>@user.public_tweets.count, "latest_status"=> latest_status,"text"=>tweet}
-        ret["status_li"] = render_to_string :partial => "tweet", :object=> @tweet, :locals=>{:type=>'friends_update'}
-        render :json => ret
+      latest_status = render_to_string :partial => "latest", :object=> @tweet
+      ret = {"status_count"=>current_user.public_tweets.count, "latest_status"=> latest_status,"text"=>tweet}
+      ret["status_li"] = render_to_string :partial => "tweet", :object=> @tweet, :locals=>{:type=>'friends_update'}
+      render :json => ret
     else
       render partial: 'statuses/tweet', locals: {tweet: @tweet, type: type}
     end
