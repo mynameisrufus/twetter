@@ -1,6 +1,6 @@
 <% fav = !current_user.nil? && !current_user.favorite_tweets.find_by_id(tweet.id).nil? %>
 
-<li class="hentry status <% fav ? "favorite" : "" -%>u-<%= h tweet.user.username -%><%= (!current_user.nil? && (tweet.user==current_user)) ? " mine" : "" -%><%= ((type=='mine' && tweet_counter==0) || type=='friends_update') ? " latest-status":"" %>" id="status_<%= h tweet.id -%>">
+<li class="hentry status <% fav ? "favorite" : "" -%>u-<%= h tweet.user.username -%><%= (!current_user.nil? && (tweet.user==current_user)) ? " mine" : "" -%><%= ((type=='mine' && tweet_counter==0) || type=='friends_update') ? " latest-status":"" %>" id="status_<%= h tweet.id -%>" data-username="<%= tweet.user.username %>" data-status-id="<%= tweet.id %>">
     <% if (type!='mine') %>
     <span class="thumb vcard author">
         <a href="/<%= h tweet.user.username %>" class="url">
@@ -29,8 +29,18 @@
       <li>
         <span class="reply">
           <span class="reply-icon icon"></span>
-          <a href="/home?status=@<%= h tweet.user.username %> %20&amp;in_reply_to_status_id=<%= h tweet.id %>&amp;in_reply_to=<%= h tweet.user.name %>">Reply</a>
+          <%= link_to 'Reply', in_reply_to_status_id: tweet.id, status: "@#{tweet.user.username} " %>
         </span>
       </li>
     </ul>
 </li>
+
+<% content_for :javascript do %>
+  $('span.reply a').click(function() {
+    var status = $(this).parents('li.status');
+    $('input#in_reply_to_status_id').val(status.data('status-id'));
+    $('textarea#status').val('@' + status.data('username') + ' ').focus();
+    setCaretToPos(document.getElementById('status'), $('textarea#status').val().length);
+    return false;
+  });
+<% end %>

@@ -1,7 +1,6 @@
 <form action="/status/update" id="doingForm" class="status-update-form" method="post">
     <input id="tab_action" name="tab" type="hidden" value="home"/>
     <input id="in_reply_to_status_id" name="in_reply_to_status_id" type="hidden" value=""/>
-    <input id="in_reply_to" name="in_reply_to" type="hidden" value=""/>
     <input id="source" name="source" type="hidden" value=""/>
     <fieldset class="common-form standard-form">
         <div class="bar">
@@ -40,6 +39,7 @@
         type: 'POST',
         data: {
           'status': $('#status').val(),
+          'in_reply_to_status_id': $('#in_reply_to_status_id').val(),
           'authenticity_token': $('meta[name=csrf-token]').attr('content')
         },
         before: function() {
