@@ -5,7 +5,7 @@ class StatusesController < ApplicationController
   protect_from_forgery :except => :search
 
   def replies
-    @tweets = Tweet.mentions(@user).find(:all, :include => :user,:limit => 25)
+    @tweets = Tweet.mentions(current_user).includes(:user).limit(25)
   end
 
   def public_timeline
