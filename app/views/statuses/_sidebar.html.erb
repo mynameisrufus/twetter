@@ -9,7 +9,7 @@
 
         </div>
 
-        <%= render :partial=>'user/user_stats', :object=> current_user %>
+        <%= render :partial=>'users/user_stats', :object=> current_user %>
         <%= render :partial=>'user/promotion', :object => promotions.sample %>
     </div>
 
@@ -34,7 +34,7 @@
 
         <div id="friends">
 
-            <%= render :partial=>'user/friend', :collection=>current_user.friends[0..35] %>
+            <%= render :partial=>'users/friend', :collection=>current_user.friends[0..35] %>
 
         </div>
         <% if (current_user.friends_count > 36) %>
