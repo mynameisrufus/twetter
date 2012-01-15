@@ -14,13 +14,14 @@ Twetter::Application.routes.draw do
     match '/statuses/public_timeline.:format' => 'statuses#friends_timeline'
     match '/status/update' => 'statuses#update'
 
+    match '/direct_messages' => 'direct_messages#index'
+    match '/direct_messages/sent' => 'direct_messages#sent'
+    match '/favorites' => 'favorites#index'
+
     root to: 'statuses#friends_timeline'
   end
 
-  match '/direct_messages' => 'direct_messages#index'
-  match '/direct_messages/sent' => 'direct_messages#sent'
   match '/search' => 'statuses#search'
-  match '/favorites' => 'favorites#index'
 
   match '/:username/status/:id' => 'statuses#show', as: 'user_status'
   match '/:username' => 'users#show', as: 'user'
