@@ -20,7 +20,7 @@
                     <input class="requires-auth" id="user_screen_name" maxlength="15" name="user[username]" size="15" type="text" value="<%= h current_user.username %>"/>
 
                     <p>
-                        <small>Your URL: <%= current_domain %>/<span id="username_url"><%= h current_user.username %></span>
+                        <small>Your URL: http://<%= request.host %>/<span id="username_url"><%= h current_user.username %></span>
                         </small>
                         <br/>
 

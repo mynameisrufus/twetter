@@ -7,11 +7,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def current_domain
-    "http://#{request.host}"
-  end
-  helper_method :current_domain
-
   def login_via_oauth
     auth = request.headers['Authorization']
     if (auth)
