@@ -4,7 +4,7 @@ working_directory '.'
 preload_app true
 timeout 60
 
-listen "/Users/twetter/current/tmp/sockets/unicorn.socket", :backlog => 64
+listen "/Users/twetter/current/tmp/sockets/unicorn.socket", :backlog => 1024
 pid "/Users/twetter/current/tmp/pids/unicorn.pid"
 stderr_path "/Users/twetter/current/log/unicorn.stderr.log"
 stdout_path "/Users/twetter/current/log/unicorn.stdout.log"
