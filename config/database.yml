@@ -8,4 +8,4 @@ test:
 
 production:
   adapter: postgresql
-  database: twetter
+  database: twetter_production
