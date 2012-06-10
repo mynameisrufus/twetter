@@ -178,10 +178,6 @@
 
 </ul>
 
-<header class="upgrade-banner">
-  <h2>Twetter could use some work. To help, talk to @ben_h.</h2>
-</header>
-
 <div id="container" class="subpage">
   <span id="loader" style="display:none"><img alt="Loader" src="/images/loader.gif"/></span>
 
@@ -197,6 +193,15 @@
                 <!--<li><a href="http://help.twitter.com" id="help_link">Help</a></li>-->
                 <li class="last">
                     <%= link_to 'Sign out', destroy_user_session_path %>
+                </li>
+            </ul>
+        </div>
+
+        <div class="help">
+            <ul class="round">
+                <li>
+                  Twetter could use some work. To help,
+                  <a href="/home?status=%40ben_h+">talk to @ben_h</a>.
                 </li>
             </ul>
         </div>
@@ -254,7 +259,7 @@
               margin: 8px 0 0 0;
               }
 
-              #navigation {
+              #navigation, .help {
                       margin-top: 5px;
                       margin-left: 10px;
                       float: right;
@@ -263,7 +268,7 @@
                       white-space: nowrap;
                       }
 
-              #navigation ul {
+              #navigation ul, .help ul {
                       display: block;
                       float: right;
                       background: #FFF;
