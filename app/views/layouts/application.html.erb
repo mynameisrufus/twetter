@@ -201,7 +201,7 @@
             <ul class="round">
                 <li>
                   Twetter could use some work. To help,
-                  <a href="/home?status=%40ben_h+">talk to @ben_h</a>.
+                  <a href="/home?status=%40ben_h+" class="hack-on-twetter">talk to @ben_h</a>.
                 </li>
             </ul>
         </div>
@@ -314,6 +314,11 @@
           <% end %>
       });
       //]]>
+      $('a.hack-on-twetter').click(function() {
+        $('textarea#status').val('@ben_h ');
+        $('textarea#status').focus();
+        return false;
+      });
      <%= yield :javascript %>
   </script>
 
