@@ -1,8 +1,8 @@
-public/.DS_Store
+.bundle/
+db/*sqlite3
+db/*sql
 public/system/avatars
 log/*
 tmp/*
-db/*sqlite3
-db/development.sqlite3
-.DS_Store
+vendor/bundle/
 *.iws
