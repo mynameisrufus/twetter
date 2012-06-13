@@ -228,7 +228,7 @@
               </div>
           </td>
 
-          <% if yield(:sidebar) %>
+          <% if yield(:sidebar).present? %>
               <td id="side_base" class="column round-right">
                   <div id="side">
                       <%= yield :sidebar %>
