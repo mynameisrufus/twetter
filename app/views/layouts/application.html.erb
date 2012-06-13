@@ -14,7 +14,7 @@
   <%= yield :head %>
 </head>
 
-<body class="<%= [browser, @body_classes].compact.join(' ') %>" id="<%= @body_id %>">
+<body class="<%= controller.action_name %> <%= controller.controller_name %> <%= [browser, @body_classes].compact.join(' ') %>" id="<%= @body_id %>">
 
 <div id="container" class="subpage">
   <span id="loader" style="display:none"><img alt="Loader" src="/images/loader.gif"/></span>
@@ -52,36 +52,22 @@
       </a>
   </div>
 
-  <table cellspacing="0" class="columns">
-      <tbody>
-      <tr>
-          <td id="content" class="column">
-              <div class="wrapper">
-                  <%= yield %>
-                  <img alt="Icon_star_full" src="/images/icon_star_full.gif" style="display:none;"/>
+  <table cellspacing=0 id="layout">
+    <tr>
+      <td id="content">
+        <%= yield %>
+      </td>
 
-              </div>
-          </td>
-
-          <% if yield(:sidebar).present? %>
-              <td id="side_base" class="column round-right">
-                  <div id="side">
-                      <%= yield :sidebar %>
-                  </div>
-                  <hr/>
-
-              </td>
-          <% end %>
-
-      </tr>
-      </tbody>
+      <% if yield(:sidebar).present? %>
+        <td id="side_base">
+          <div id="side">
+            <%= yield :sidebar %>
+          </div>
+        </td>
+      <% end %>
+    </tr>
   </table>
-
-  <div id="footer" class="round wide">
-      <ul>
-          <li class="first">&copy; 2009 Twetter</li>
-      </ul>
-  </div>
+</div>
 
   <script src="/javascripts/jquery.min.js" type="text/javascript"></script>
   <script src="/javascripts/application.js" type="text/javascript"></script>

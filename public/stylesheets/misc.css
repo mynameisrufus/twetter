@@ -2,6 +2,19 @@
 
 body {
   background: #C0DEED url('/images/bg-clouds.png') repeat-x;
+  line-height: 1.5;
+}
+
+label {
+  font-size: 14px;
+}
+
+input {
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 2px;
+  padding: 0.1em 0.2em;
+  box-sizing: border-box;
 }
 
 body#show #content .meta a.screen-name,
@@ -62,10 +75,6 @@ body#retweeted_of_mine #content .tabMenu #retweeted_of_mine_tab a,
 
 .unconfirmed-email-banner {
   border-bottom: solid 1px #DFDFDF;
-}
-#side_base {
-  border-left:1px solid #DFDFDF;
-  background-color: #D1D1C7;
 }
 
 ul.sidebar-menu li.active a,
@@ -139,9 +148,43 @@ a.edit-list {
 
 /* From within the layout body */
 
+form div {
+  margin: 2em 0;
+}
+
+body.new.sessions #container {
+  width: 400px;
+}
+
+body.new.sessions #content {
+  width: auto;
+  border-radius: 5px;
+}
+
+body.new.sessions input {
+  font-size: 24px;
+}
+
+form.status-update-form div {
+  margin: 0;
+}
+
+table#layout td {
+  vertical-align: top;
+}
+
+#content {
+  padding: 5px 10px 15px;
+}
+
+#side_base {
+  border-left:1px solid #DFDFDF;
+  background-color: #D1D1C7;
+}
+
 #header {
   text-align: left;
-  margin: 8px 0;
+  margin: 8px 0 16px 0;
 }
 
 #navigation, .help {
