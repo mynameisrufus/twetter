@@ -12,22 +12,14 @@
     </strong>
 
       <div class="person-actions" id="actions<%= h user.id %>">
-
-
         <span id="removed<%= h user.id %>"></span>
         <% if (user != current_user) %>
-        <div  id="control<%= h user.id %>">
-
-            <img src="/images/yes.gif" alt="following" class="follow-icon" />You are following <%= h user.username %>            <span id="notifications14292159" style="display:none;font-size:90%">
-
-              <!--<button style="margin-left:10px;" id="remove-btn<%= h user.id %>" class="small remove-button">remove</button>-->
-              
-            </span>
-
+        <div id="control<%= h user.id %>">
+          <img src="/images/yes.gif" alt="following" class="follow-icon" />
+          You are following <%= h user.username %>
         </div>
         <% end %>
       </div>
-
 
   </td>
   <td>
