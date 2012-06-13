@@ -4,177 +4,17 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
   <meta content="en-us" http-equiv="Content-Language"/>
   <meta content="Twetter is a free social messaging utility for staying connected in real-time" name="description"/>
-  <meta content="no" http-equiv="imagetoolbar"/>
-  <meta content="width => 780" name="viewport"/>
-  <meta content="4FTTxY4uvo0RZTMQqIyhh18HsepyJOctQ+XTOu1zsfE=" name="verify-v1"/>
-  <meta content="1" name="page"/>
-  <meta content="IE=EmulateIE7" name="X-UA-Compatible"/>
-  <meta content="<%= current_user ? "y" : "n" %>" name="session-loggedin"/>
+  <meta content="width = 780" name="viewport"/>
   <%= csrf_meta_tag %>
 
-  <% if current_user %>
-    <meta content="<%= current_user.id %>" name="session-userid"/>
-    <meta content="<%= current_user.username %>" name="session-user-screen_name"/>
-  <% end %>
-  <% if current_user || @duser %>
-    <meta content="<%= (@duser || current_user).username %>" name="page-user-screen_name"/>
-  <% end %>
   <title><%= @title %></title>
   <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-  <%= stylesheet_link_tag 'twitter', 'geo', 'buttons_new' %>
+  <%= stylesheet_link_tag 'twitter', 'misc', 'geo', 'buttons_new' %>
 
   <%= yield :head %>
-
-  <style type="text/css">
-    body {
-      background-color: #EBEBEB;
-    }
-  body#show #content .meta a.screen-name,
-  #content .shared-content .screen-name,
-  #content .meta .byline a {
-    color: #E65500;
-  }
-
-  /* Link Color */
-  a,
-  #content tr.hentry:hover a,
-  body#profile #content div.hentry:hover a,
-  #side .stats a:hover span.stats_count,
-  #side div.user_icon a:hover,
-  li.verified-profile a:hover,
-  #side .promotion .definition strong,
-  p.list-numbers a:hover,
-  #side div.user_icon a:hover span,
-  #content .tabMenu li a,
-  .translator-profile a:hover,
-  #local_trend_locations li a,
-  .modal-content .list-slug,
-  .tweet-label a:hover,
-  ol.statuses li.garuda-tweet:hover .actions-hover li span a,
-  ol.statuses li.garuda-tweet .actions-hover li span a:hover {
-    color: #E65500;
-  }
-
-  body,
-  ul#tabMenu li a, #side .section h1,
-  #side .stat a,
-  #side .stats a span.stats_count,
-  #side div.section-header h1,
-  #side div.user_icon a,
-  #side div.user_icon a:hover,
-  #side div.section-header h3.faq-header,
-  ul.sidebar-menu li.active a,
-  li.verified-profile a,
-  #side .promotion a,
-  body #content .list-header h2,
-  p.list-numbers a,
-  .bar h3 label,
-  body.timeline #content h1,
-  .list-header h2 a span,
-  #content .tabMenu li.active a,
-  body#direct_messages #content .tabMenu #inbox_tab a,
-  body#inbox #content .tabMenu #inbox_tab a,
-  body#sent #content .tabMenu #sent_tab a,
-  body#direct_messages #content .tabMenu #inbox_tab a,
-  body#retweets_by_others #content .tabMenu #retweets_by_others_tab a,
-  body#retweets #content .tabMenu #retweets_tab a,
-  body#retweeted_by_others #content .tabMenu #retweeted_by_others_tab a,
-  body#retweeted_of_mine #content .tabMenu #retweeted_of_mine_tab a,
-  .translator-profile a,
-  #owners_lists h2 a {
-    color: #333333;
-  }
-
-  .unconfirmed-email-banner {
-    border-bottom: solid 1px #DFDFDF;
-  }
-  #side_base {
-    border-left:1px solid #DFDFDF;
-    background-color: #D1D1C7;
-  }
-
-  ul.sidebar-menu li.active a,
-  ul.sidebar-menu li a:hover,
-  #side div#custom_search.active,
-  #side .promotion,
-  .notify div {
-    background-color: #E5E5DB;
-  }
-
-  .list-header,
-  .list-controls,
-  ul.sidebar-list li.active a,
-  ul.sidebar-list li a:hover,
-  .list-header-inner {
-    background-color: #D1D1C7 !important;
-  }
-
-  #side .actions,
-  #side .promo,
-  #design .side-section {
-    border: 1px solid #DFDFDF;
-  }
-
-  #side div.section-header h3 {
-    border-bottom: 1px solid #DFDFDF;
-  }
-
-  #side p.sidebar-location {
-    border-bottom: 1px dotted #DFDFDF;
-  }
-
-  #side hr {
-    background: #DFDFDF;
-    color: #DFDFDF;
-  }
-
-  ul.sidebar-menu li.loading a {
-    background: #E5E5DB url('http://a1.twimg.com/a/1270853725/images/spinner.gif') no-repeat 171px 0.5em !important;
-  }
-
-  #side .collapsible h2.sidebar-title {
-    background: transparent url('http://a2.twimg.com/a/1270853725/images/toggle_up_dark.png') no-repeat center right !important;
-  }
-
-  #side .collapsible.collapsed h2.sidebar-title {
-    background: transparent url('http://a1.twimg.com/a/1270853725/images/toggle_down_dark.png') no-repeat center right !important;
-  }
-
-  #side ul.lists-links li a em {
-    background: url('http://a3.twimg.com/a/1270853725/images/arrow_right_dark.png') no-repeat left top;
-  }
-
-  #side span.pipe {
-    border-left:1px solid #DFDFDF;
-  }
-
-  #list_subscriptions span.view-all,
-  #list_memberships span.view-all,
-  #profile span.view-all,
-  #profile_favorites span.view-all,
-  #following span.view-all,
-  #followers span.view-all {
-    border-left: 0;
-  }
-
-  a.edit-list {
-    border-right: 1px solid #DFDFDF !important;
-  }
-  </style>
-  <style type="text/css">
-    body { background: #C0DEED url('/images/bg-clouds.png') repeat-x; }
-  </style>
 </head>
 
 <body class="<%= [browser, @body_classes].compact.join(' ') %>" id="<%= @body_id %>">
-<div id="dim-screen"></div>
-<ul id="accessibility" class="offscreen">
-  <li>On a mobile phone? Check out <a href="http://m.twitter.com/">m.twitter.com</a>!</li>
-  <li><a href="#footer" accesskey="2">Skip to navigation</a></li>
-  <li><a href="#tabMenu" accesskey="3">Jump to the sidebar</a></li>
-  <li><a href="#signin">Skip to sign in form</a></li>
-
-</ul>
 
 <div id="container" class="subpage">
   <span id="loader" style="display:none"><img alt="Loader" src="/images/loader.gif"/></span>
@@ -212,9 +52,6 @@
       </a>
   </div>
 
-
-  <div class="content-bubble-arrow"></div>
-
   <table cellspacing="0" class="columns">
       <tbody>
       <tr>
@@ -246,84 +83,14 @@
       </ul>
   </div>
 
-
-  <hr/>
-
-
-  <style>
-
-      #header {
-              text-align: left;
-              margin: 8px 0 0 0;
-              }
-
-              #navigation, .help {
-                      margin-top: 5px;
-                      margin-left: 10px;
-                      float: right;
-                      height: 1.5em;
-                      text-align: right;
-                      white-space: nowrap;
-                      }
-
-              #navigation ul, .help ul {
-                      display: block;
-                      float: right;
-                      background: #FFF;
-                      padding: 7px;
-                      }
-
-              .top-nav li {
-                      display: inline;
-                      padding: 0 3px;
-                      }
-
-              .top-nav li.signup-link {
-                      margin: 0 3px;
-                      }
-
-  </style>
-
   <script src="/javascripts/jquery.min.js" type="text/javascript"></script>
   <script src="/javascripts/application.js" type="text/javascript"></script>
   <script src="/javascripts/jquery.livequery.js" type="text/javascript"></script>
   <%= javascript_include_tag 'application' %>
-  <% if alert || notice %>
   <script type="text/javascript">
-    function showFlashNotice() {
-      var notification = new InfoNotification();
-      notification.setMessage("<%= alert || notice %>");
-      notification.show();
-    }
-    if (window.attachEvent) {
-      window.attachEvent('onload', showFlashNotice)
-    } else {
-      window.addEventListener('load', showFlashNotice, false);
-    }
+    //<![CDATA[
+      <%= yield :javascript %>
+    //]]>
   </script>
-  <% end %>
-  <script type="text/javascript">
-      //<![CDATA[
-      if (window.top !== window.self) { setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
-
-      $( function () {
-          <% if (flash[:notice]||flash[:error]) %>
-              setTimeout(function() { $('#flash').slideUp(); }, 3000);
-          <% end %>
-      });
-      //]]>
-      $('a.hack-on-twetter').click(function() {
-        $('textarea#status').val('@ben_h ');
-        $('textarea#status').focus();
-        return false;
-      });
-     <%= yield :javascript %>
-  </script>
-
-    <div id="notifications">
-      <div class="notification-bar-container">
-      </div>
-    </div>
 </body>
-
 </html>

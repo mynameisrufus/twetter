@@ -19,20 +19,6 @@ dt {
     margin-top: 5px;
 }
 
-#dim-screen {
-    position: absolute;
-    background: #000;
-    z-index: 99;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: .90;
-    filter: alpha(opacity = 90);
-    display: none;
-    margin: 0 auto;
-}
-
 #dev_header {
     padding: 5px;
     height: 25px;
@@ -52,7 +38,7 @@ dt {
     font-size: 1.1em;
 }
 
-#accessibility, #navigation h3, #footer h3 {
+#navigation h3, #footer h3 {
     position: absolute;
     left: -9999px;
     overflow: hidden;
