@@ -1,13 +1,13 @@
 <h1>Welcome!</h1>
 
-<h3>If you're new, enter your twitter username and choose a password.</h3>
+<h3>There are no passwords. With great power comes great responsibility.</h3>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div><%= f.label :username %><br />
   <%= f.text_field :username %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div style="display: none"><%= f.label :password %><br />
+  <%= f.password_field :password, value: 'blank', autocomplete: 'off' %></div>
 
   <% if devise_mapping.rememberable? -%>
     <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
