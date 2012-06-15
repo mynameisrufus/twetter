@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   validates_presence_of     :username
   validates_uniqueness_of   :username
 
+  before_create :hack_password
+
   def self.find_for_authentication conditions
     find_or_create_by_username(conditions[:username])
   end
@@ -29,6 +31,10 @@ class User < ActiveRecord::Base
     else
       super
     end
+  end
+
+  def hack_password
+    self.password = 'blank'
   end
 
   def username=(value)
