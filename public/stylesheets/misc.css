@@ -258,3 +258,20 @@ outline: none;
 :focus {
 -moz-outline-style: none;
 }
+
+
+/* from geo.css */
+
+li .refresh {
+background: url(http://s.twimg.com/a/1270853725/images/sprite-icons.png) no-repeat -96px -80px;
+width: 7px;
+margin: 0 5px 2px 2px;
+}
+li .clear {
+display: inline-block;
+background: url(http://s.twimg.com/a/1270853725/images/sprite-icons.png) no-repeat -128px -80px;
+height: 7px;
+width: 7px;
+margin: 0 5px 0 2px;
+vertical-align: middle;
+}
