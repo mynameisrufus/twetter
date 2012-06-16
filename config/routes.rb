@@ -18,6 +18,9 @@ Twetter::Application.routes.draw do
     match '/direct_messages/sent' => 'direct_messages#sent'
     match '/favorites' => 'favorites#index'
 
+    match '/account/settings' => 'account#settings'
+    match '/account/picture' => 'account#picture'
+
     root to: 'statuses#friends_timeline'
   end
 

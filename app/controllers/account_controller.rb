@@ -30,8 +30,8 @@ class AccountController < ApplicationController
   end
 
   def settings
-    if (request.post?)
-      if (@user.update_attributes(params[:user]))
+    if (request.put?)
+      if (current_user.update_attributes(params[:user]))
         flash[:notice] = 'User attributes updated'
       end
     end
