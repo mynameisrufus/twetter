@@ -157,41 +157,6 @@ padding-right: 0;
 #footer.wide {
 width: 100%;
 }
-.tipsy {
-opacity: .8;
-filter: alpha(opacity=80);
-background-repeat: no-repeat;
-padding: 5px;
-}
-.tipsy-inner {
-padding: 8px 8px;
-max-width: 200px;
-font: 11px 'Lucida Grande',sans-serif;
-font-weight: bold;
--moz-border-radius: 4px;
--khtml-border-radius: 4px;
--webkit-border-radius: 4px;
-border-radius: 4px;
-background-color: #000;
-color: white;
-text-align: left;
-}
-.tipsy-north {
-background-image: url('http://s.twimg.com/a/1270853725/images/tipsy/tipsy-north.gif');
-background-position: top center;
-}
-.tipsy-south {
-background-image: url('http://s.twimg.com/a/1270853725/images/tipsy/tipsy-south.gif');
-background-position: bottom center;
-}
-.tipsy-east {
-background-image: url('http://s.twimg.com/a/1270853725/images/tipsy/tipsy-east.gif');
-background-position: right center;
-}
-.tipsy-west {
-background-image: url('http://s.twimg.com/a/1270853725/images/tipsy/tipsy-west.gif');
-background-position: left center;
-}
 * {
 margin: 0;
 padding: 0;
@@ -2922,30 +2887,6 @@ padding: 0 10px;
 #content ol.statuses li.search_result a.reply {
 background-image: url('http://s.twimg.com/a/1270853725/images/icon_reply.gif');
 }
-.tipsy .retweet-icon {
-background-image: url(http://s.twimg.com/a/1270853725/images/sprite-icons.png);
-background-position: -96px -48px;
-height: 16px;
-line-height: 13px;
-width: 16px;
-position: relative;
-margin-top: -5px;
-top: 5px;
-left: -1px;
-display: -moz-inline-stack;
-display: inline-block;
-zoom: 1;*display:inline;*top:2px;
-}
-.tipsy .retweet_tip_tip {
-padding-top: 4px;
-line-height: 13px;
-}
-.retweet-tooltip.tipsy .tipsy-inner {
-max-width: 300px;
-}
-.tipsy.tipsy-north.left-align {
-background-position: 14px top;
-}
 .account-nav {
 background: #555;
 font: 11px Lucida Grande,Tahoma,sans-serif;
@@ -3124,30 +3065,6 @@ body.contributor-skybar {
 background-position: 0 26px;
 padding-top: 26px!important;
 _padding-top: 36px!important;
-}
-.tipsy .retweet-icon {
-background-image: url(http://s.twimg.com/a/1270853725/images/sprite-icons.png);
-background-position: -96px -48px;
-height: 16px;
-line-height: 13px;
-width: 16px;
-position: relative;
-margin-top: -5px;
-top: 5px;
-left: -1px;
-display: -moz-inline-stack;
-display: inline-block;
-zoom: 1;*display:inline;*top:2px;
-}
-.tipsy .retweet_tip_tip {
-padding-top: 4px;
-line-height: 13px;
-}
-.retweet-tooltip.tipsy .tipsy-inner {
-max-width: 300px;
-}
-.tipsy.tipsy-north.left-align {
-background-position: 14px top;
 }
 .geo_pin {
 width: 10px;
@@ -4275,13 +4192,6 @@ background-position: -240px 0;
 }
 ol.statuses li.garuda-tweet ul.meta-data a.meta-replies:hover em {
 background-position: -16px 0;
-}
-.garuda-tipsy a {
-color: #fff;
-}
-.garuda-tipsy-container .tipsy-inner {
-max-width: none!important;
-font-weight: normal;
 }
 body#list .retweet-link,body#list_show .retweet-link {
 display: none;
