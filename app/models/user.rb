@@ -8,23 +8,23 @@ class User < ActiveRecord::Base
   has_attached_file :avatar
 
   has_many :tweets
-  has_many :direct_messages_received, :class_name=>'Tweet', :foreign_key=>'recipient_id', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
-  has_many :direct_messages_sent, :class_name=>'Tweet', :conditions=>"tweet_type='direct'", :order => "tweets.created_at DESC"
-  has_many :public_tweets, :class_name=>'Tweet', :conditions=>"tweet_type!='direct'", :order=>"tweets.created_at DESC"
+  has_many :direct_messages_received, class_name: 'Tweet', foreign_key: 'recipient_id', conditions: "tweet_type='direct'", order: "tweets.created_at DESC"
+  has_many :direct_messages_sent, class_name: 'Tweet', conditions: "tweet_type='direct'", order: "tweets.created_at DESC"
+  has_many :public_tweets, class_name: 'Tweet', conditions: "tweet_type!='direct'", order: "tweets.created_at DESC"
 
   has_many :favorites
-  has_many :favorite_tweets, :source=>:tweet, :through=>:favorites, :order => "created_at DESC"
+  has_many :favorite_tweets, source: :tweet, through: :favorites, order: "created_at DESC"
 
-  validates_presence_of     :username
-  validates_uniqueness_of   :username
+  validates_presence_of :username
+  validates_uniqueness_of :username
 
   before_create :hack_password
 
-  def self.find_for_authentication conditions
-    find_or_create_by_username(conditions[:username])
+  def self.find_for_authentication(conditions)
+    find_or_create_by_username conditions[:username]
   end
 
-  def valid_password? password
+  def valid_password?(password)
     if encrypted_password.blank?
       self.password = password
       save!
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def username=(value)
-    write_attribute :username, (value ? value.downcase : nil)
+    write_attribute :username, value ? value.downcase : nil
   end
 
   def self.upload_image(username, image)
@@ -56,19 +56,21 @@ class User < ActiveRecord::Base
     "http://twitter.com#{avatar.url}"
   end
 
-  def to_map(include_latest=false)
-    ret = {:id=>id, :name=>name, :screen_name=>username, :profile_image_url=> profile_url,
-     :location=>location, :description=>bio, :url=>'', :protected=>false, :followers_count=>followers_count}
-    if (include_latest)
-      last_tweet = public_tweets.find(:first)
-      ret[:status] = last_tweet.to_map(false) if (!last_tweet.nil?)
+  def to_map(include_latest = false)
+    ret = {
+      id: id, name: name, screen_name: username, profile_image_url: profile_url,
+      location: location, description: bio, url: '', protected: false, followers_count: followers_count
+    }
+    if include_latest
+      last_tweet = public_tweets.first
+      ret[:status] = last_tweet.to_map(false) if last_tweet
     end
     ret
   end
 
   def name
-      n = read_attribute(:name)
-      n = self.username if (n.blank?)
+      n = read_attribute :name
+      n = username if n.blank?
       n
   end
 
@@ -77,19 +79,19 @@ class User < ActiveRecord::Base
   end
 
   def friends_count
-      User.count - 1
+    User.count - 1
   end
 
   def followers_count
-      User.count - 1
+    User.count - 1
   end
 
   def friends
-    User.find(:all, :conditions => ["id != ?", self.id], :order => :username)
+    User.all(conditions: ["id != ?", self.id], order: :username)
   end
 
   def mentions
-    Tweet.mentions(self)
+    Tweet.mentions self
   end
 
   def followers
@@ -100,16 +102,9 @@ class User < ActiveRecord::Base
     username
   end
 
-
   private
 
    def self.md5(pass)
-     Digest::MD5.hexdigest("--Twetter--#{pass}")
+     Digest::MD5.hexdigest "--Twetter--#{pass}"
    end
-
-
-  protected
-    
-
-
 end
