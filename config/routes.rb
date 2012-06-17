@@ -1,5 +1,4 @@
 Twetter::Application.routes.draw do
-
   devise_for :users, sign_out_via: :get
 
   authenticate do
@@ -25,5 +24,4 @@ Twetter::Application.routes.draw do
 
   match '/:username/status/:id' => 'statuses#show', as: 'user_status'
   match '/:username' => 'users#show', as: 'user'
-
 end
