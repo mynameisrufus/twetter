@@ -33,4 +33,12 @@ module StatusesHelper
     def link_urls(tweet)
       tweet.gsub(/([A-Z]+:\/\/[^\s]+)/i, '<a href="\1">\1</a>')
     end
+
+    def update_label
+      if current_path[:controller] == 'users'
+        "Send message to @#{user.username}:"
+      else
+        "What's happening?"
+      end
+    end
 end

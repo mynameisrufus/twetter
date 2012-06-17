@@ -24,4 +24,9 @@ module ApplicationHelper
       {:name => 'Ba&middot;na&middot;na&middot;jour', :part => 'n.', :text => 'A sinatra/bonjour app by @toolmantim for sharing publishing and discovering git repos. n.b.: There are no secret bananas.'}
     ]
   end
+
+  def current_path
+    @current_path ||= params.slice(:controller, :action)
+  end
+
 end

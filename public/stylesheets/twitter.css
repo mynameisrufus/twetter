@@ -1597,10 +1597,6 @@ font-size: 18px;
 body#profile #content h2.thumb,body#profile_favorites h2.thumb {
 padding-bottom: 20px;
 }
-body#profile ol.statuses span.status-body {
-margin-left: 0;
-min-height: 0;
-}
 body#profile ol.statuses li {
 padding-left: .5em;
 }

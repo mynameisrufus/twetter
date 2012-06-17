@@ -6,10 +6,10 @@
 <div class="bottom-nav">
   <div id="pagination" class="pagination">
     <% if @more_pages %>
-      <a href="/home?page=<%= @page + 1 %>" class="section_links" rel="prev">Older &raquo;</a>
+      <%= link_to 'Older »', current_path.merge(:page => @page + 1), :class => 'section_links', :rel => 'prev' %>
     <% end %>
     <% if @page > 1 %>
-      <a href="/home?page=<%= @page - 1 %>" class="section_links" rel="prev">&laquo; Newer</a>
+      <%= link_to '« Newer', current_path.merge(:page => @page - 1), :class => 'section_links', :rel => 'prev' %>
     <% end %>
   </div>
 </div>
