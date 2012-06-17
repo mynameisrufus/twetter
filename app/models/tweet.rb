@@ -31,7 +31,7 @@ class Tweet < ActiveRecord::Base
 
   def replies
     immediate_replies = Tweet.where(in_reply_to_status_id: id)
-    immediate_replies.inject([]) {|result, reply| result + reply.replies}
+    immediate_replies.inject(immediate_replies) {|result, reply| result + reply.replies}
   end
 
   def to_map(include_user = true)
