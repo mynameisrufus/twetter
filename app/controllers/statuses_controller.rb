@@ -1,11 +1,9 @@
 class StatusesController < ApplicationController
-  TWEETS_PER_PAGE = 50
-  
   # We don't want to protect search from forgery, cos, well, it's not that important
   protect_from_forgery :except => :search
 
   def replies
-    @tweets = Tweet.mentions(current_user).includes(:user).limit(25)
+    @tweets = Tweet.mentions(current_user).includes(:user).page(params[:page])
   end
 
   def public_timeline
@@ -13,21 +11,7 @@ class StatusesController < ApplicationController
   end
 
   def friends_timeline
-    @page = params[:page].nil? ? 1 : params[:page].to_i
-    from = (@page - 1 ) * TWEETS_PER_PAGE
-    to = TWEETS_PER_PAGE + from + 1
-
-    @tweets = Tweet.find(
-            :all,
-            :order => "tweets.created_at DESC",
-            :conditions => "tweets.tweet_type!='direct'",
-            :include => :user,
-            :limit => to,
-            :offset => from
-    )
-    
-    @more_pages = (@tweets.length > TWEETS_PER_PAGE)
-    @tweets = @tweets[0, TWEETS_PER_PAGE]
+    @tweets = Tweet.includes(:user).order("tweets.created_at DESC").where("tweets.tweet_type!='direct'").page(params[:page])
   end
 
   def search
@@ -37,7 +21,7 @@ class StatusesController < ApplicationController
     if (@keyword.length > 0)
       conditions=["tweets.tweet_type!='direct'"]
       key_conditions=[]
-            
+
       # Run over each of our keywords and construct an array we'll use to
       # generate the SQL snippet.
       params[:keyword].split(/\s/).each do |term|
@@ -46,17 +30,8 @@ class StatusesController < ApplicationController
       end
 
       conditions[0] << " AND (#{key_conditions.join(' AND ')})"
-          
-      @tweets = Tweet.find(
-              :all,
-              :order => "tweets.created_at DESC",
-              :conditions => conditions,
-              :include => :user,
-              :limit => TWEETS_PER_PAGE
-      )
-      if(@tweets.length == TWEETS_PER_PAGE)
-        @max_results = TWEETS_PER_PAGE
-      end
+
+      @tweets = Tweet.includes(:user).order("tweets.created_at DESC").where(conditions).page(params[:page])
     end
   end
 
