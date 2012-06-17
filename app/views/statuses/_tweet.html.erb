@@ -8,7 +8,7 @@
     </span>
     <% end %>
     <span class="status-body">
-        <% if (type!='mine') %>
+        <% if type != 'mine' %>
             <strong><a href="/<%= h tweet.user.username %>" class="screen-name" title="<%= h tweet.user.name %>"><%= h tweet.user.username %></a></strong>
         <% end %>
         <span class="entry-content"><%= create_links(tweet.tweet) %></span>

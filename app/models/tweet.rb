@@ -18,14 +18,27 @@ class Tweet < ActiveRecord::Base
   end
 
   def related
-    predecessors = []
+    ancestors + replies
+  end
+
+  def ancestors
+    ancestors = []
     current = self
     while current
-      predecessors << current
+      ancestors << current
       current = current.in_reply_to_status
     end
-    predecessors
-    # TODO Add later replies.
+    ancestors
+  end
+
+  def replies
+    immediate_replies = Tweet.where(in_reply_to_status_id: id)
+    # TODO Use inject.
+    replies = immediate_replies || []
+    immediate_replies.each do |reply|
+      replies += reply.replies
+    end
+    replies
   end
 
   def to_map(include_user = true)
