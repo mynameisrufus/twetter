@@ -1,7 +1,7 @@
 <% fav = !current_user.nil? && !current_user.favorite_tweets.find_by_id(tweet.id).nil? %>
 
 <li class="hentry status <% fav ? "favorite" : "" -%>u-<%= h tweet.user.username -%><%= (!current_user.nil? && (tweet.user==current_user)) ? " mine" : "" -%><%= ((type=='mine' && tweet_counter==0) || type=='friends_update') ? " latest-status":"" %>" id="status_<%= h tweet.id -%>" data-username="<%= tweet.user.username %>" data-status-id="<%= tweet.id %>">
-    <% if (type!='mine') %>
+    <% if type != 'mine' %>
     <span class="thumb vcard author">
         <a href="/<%= h tweet.user.username %>" class="url">
             <img alt="<%= h tweet.user.name %>" class="photo fn" height="48" src="<%= h tweet.user.avatar.url %>" width="48"/></a>

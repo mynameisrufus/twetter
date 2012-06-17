@@ -1,4 +1,3 @@
-<%# TODO Remove duplication with _tweet partial. %>
 <% setup(:title=>"Tweet", :body_id=>"show", :body_classes=>"tweet") %>
 
 <div id="permalink" class="status">
@@ -19,6 +18,9 @@
     </span>
 
     <ul class="actions-hover">
+      <li>
+        <a href="/conversations/<%= @tweet.id %>">Conversation</a>
+      </li>
       <li>
         <span class="reply">
           <span class="reply-icon icon"></span>
