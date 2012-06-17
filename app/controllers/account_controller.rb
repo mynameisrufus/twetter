@@ -1,6 +1,6 @@
 class AccountController < ApplicationController
   def index
-    @tweets = @user.public_tweets.find(:all, :include => :user, :limit => 20  )
+    @tweets = @user.tweets.timeline
   end
 
   def end_session

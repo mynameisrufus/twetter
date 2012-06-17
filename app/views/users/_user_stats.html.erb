@@ -15,7 +15,7 @@
             </a>
         </td>
         <td>
-            <a href="/<%= h user_stats.username %>" rel="me"><span id="update_count" class="stats_count numeric"><%= user_stats.public_tweets.count %></span>
+            <a href="/<%= h user_stats.username %>" rel="me"><span id="update_count" class="stats_count numeric"><%= user_stats.tweets.timeline.count %></span>
                 <span class="label">Updates</span></a>
         </td>
     </tr>

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   def show
     params[:status] = "@#{user.username} "
-    @tweets = user.public_tweets.page(params[:page])
+    @tweets = user.tweets.timeline.page(params[:page])
   end
 
   private
