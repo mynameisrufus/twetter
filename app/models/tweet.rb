@@ -22,7 +22,7 @@ class Tweet < ActiveRecord::Base
   end
 
   def related
-    ancestors + [self] + replies
+    (ancestors + [self] + replies).sort_by {|tweet| tweet.updated_at}
   end
 
   def ancestors
