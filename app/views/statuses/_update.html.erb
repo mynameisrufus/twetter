@@ -4,11 +4,10 @@
     <input id="source" name="source" type="hidden" value=""/>
     <fieldset class="common-form standard-form">
         <div class="bar">
-            <h3><label for="status" class="doing">What's happening?</label></h3>
-      <span id="chars_left_notice" class="numeric">
-
-        <strong id="status-field-char-counter" class="char-counter"></strong>
-      </span>
+          <h3><label for="status" class="doing"><%= update_label %></label></h3>
+          <span id="chars_left_notice" class="numeric">
+            <strong id="status-field-char-counter" class="char-counter"></strong>
+          </span>
         </div>
         <div class="info">
             <textarea cols="40" rows="2" id="status" name="status"><%= params[:status] %></textarea>

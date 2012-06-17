@@ -1,11 +1,9 @@
 class StatusesController < ApplicationController
-  TWEETS_PER_PAGE = 50
-  
   # We don't want to protect search from forgery, cos, well, it's not that important
   protect_from_forgery except: :search
 
   def replies
-    @tweets = Tweet.mentions(current_user).includes(:user).limit(25)
+    @tweets = Tweet.mentions(current_user).includes(:user).page(params[:page])
   end
 
   def public_timeline
@@ -13,20 +11,7 @@ class StatusesController < ApplicationController
   end
 
   def friends_timeline
-    @page = params[:page].nil? ? 1 : params[:page].to_i
-    from = (@page - 1 ) * TWEETS_PER_PAGE
-    to = TWEETS_PER_PAGE + from + 1
-
-    @tweets = Tweet.all(
-            order: "tweets.created_at DESC",
-            conditions: "tweets.tweet_type!='direct'",
-            include: :user,
-            limit: to,
-            offset: from
-    )
-    
-    @more_pages = @tweets.length > TWEETS_PER_PAGE
-    @tweets = @tweets[0, TWEETS_PER_PAGE]
+    @tweets = Tweet.timeline.includes(:user).page(params[:page])
   end
 
   def search
@@ -34,9 +19,9 @@ class StatusesController < ApplicationController
     @keyword = params[:keyword].nil? ? '' : params[:keyword].strip
 
     if @keyword.length > 0
-      conditions = ["tweets.tweet_type!='direct'"]
-      key_conditions = []
-            
+      conditions=['']
+      key_conditions=[]
+
       # Run over each of our keywords and construct an array we'll use to
       # generate the SQL snippet.
       params[:keyword].split(/\s/).each do |term|
@@ -44,17 +29,9 @@ class StatusesController < ApplicationController
         conditions << "%#{term}%"
       end
 
-      conditions[0] << " AND (#{key_conditions.join(' AND ')})"
-          
-      @tweets = Tweet.all(
-              order: "tweets.created_at DESC",
-              conditions: conditions,
-              include: :user,
-              limit: TWEETS_PER_PAGE
-      )
-      if @tweets.length == TWEETS_PER_PAGE
-        @max_results = TWEETS_PER_PAGE
-      end
+      conditions[0] << "#{key_conditions.join(' AND ')}"
+
+      @tweets = Tweet.timeline.includes(:user).where(conditions).page(params[:page])
     end
   end
 
@@ -65,7 +42,7 @@ class StatusesController < ApplicationController
 
   def user_timeline
     limit = params[:all] ? 100000000000 : 25
-    @tweets = @user.public_tweets.all(include: :user, limit: limit)
+    @tweets = @user.tweets.timeline.all(:include => :user,:limit => limit)
   end
   
   def followers
@@ -97,9 +74,9 @@ class StatusesController < ApplicationController
     @tweet = Tweet.create(tweet: tweet, user_id: current_user.id, recipient: recipient, in_reply_to_status: in_reply_to_status, tweet_type: type, source: params[:source] || 'web')
     if params['twttr']
       latest_status = render_to_string partial: "latest", object: @tweet
-      ret = {"status_count" => current_user.public_tweets.count, "latest_status" => latest_status, "text" => tweet}
+      ret = {"status_count" => current_user.tweets.timeline.count, "latest_status" => latest_status, "text" => tweet}
       ret["status_li"] = render_to_string partial: "tweet", object: @tweet, locals: {type: 'friends_update'}
-      render :json => ret
+      render json: ret
     else
       render partial: 'statuses/tweet', locals: {tweet: @tweet, type: type}
     end

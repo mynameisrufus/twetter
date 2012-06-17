@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+  def show
+    params[:status] = "@#{user.username} "
+    @tweets = user.tweets.timeline.page(params[:page])
+  end
+
   private
 
   def user

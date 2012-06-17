@@ -33,4 +33,19 @@ module StatusesHelper
     def link_urls(tweet)
       tweet.gsub(/([A-Z]+:\/\/[^\s]+)/i, '<a href="\1">\1</a>')
     end
+
+    # Kaminari has link_to_next_page, but not this, so we need to add it so users can page back and forth
+    def link_to_previous_page(scope, name, options = {})
+      params = options.delete(:params) || {}
+      param_name = options.delete(:param_name) || Kaminari.config.param_name
+      link_to name, params.merge(param_name => (scope.current_page - 1)), options.reverse_merge(:rel => 'prev') unless scope.first_page?
+    end
+
+    def update_label
+      if current_path[:controller] == 'users'
+        "Send message to @#{user.username}:"
+      else
+        "What's happening?"
+      end
+    end
 end

@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :direct_messages_received, class_name: 'Tweet', foreign_key: 'recipient_id', conditions: "tweet_type='direct'", order: "tweets.created_at DESC"
   has_many :direct_messages_sent, class_name: 'Tweet', conditions: "tweet_type='direct'", order: "tweets.created_at DESC"
-  has_many :public_tweets, class_name: 'Tweet', conditions: "tweet_type!='direct'", order: "tweets.created_at DESC"
 
   has_many :favorites
   has_many :favorite_tweets, source: :tweet, through: :favorites, order: "created_at DESC"
@@ -62,7 +61,7 @@ class User < ActiveRecord::Base
       location: location, description: bio, url: '', protected: false, followers_count: followers_count
     }
     if include_latest
-      last_tweet = public_tweets.first
+      last_tweet = latest_tweet
       ret[:status] = last_tweet.to_map(false) if last_tweet
     end
     ret
@@ -75,7 +74,7 @@ class User < ActiveRecord::Base
   end
 
   def latest_tweet
-      public_tweets[0]
+    tweets.timeline.first
   end
 
   def friends_count

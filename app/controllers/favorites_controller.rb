@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   def index
-    @tweets = current_user.favorite_tweets
+    @tweets = current_user.favorite_tweets.page(params[:page])
   end
 
   def create
