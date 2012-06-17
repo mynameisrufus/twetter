@@ -13,6 +13,7 @@
     <span class="entry-meta"><a href="/<%= h latest.user.username %>/status/<%= h latest.id %>" class="entry-date" rel="bookmark"><span class="published" title="<%= latest.created_at_formatted %>"><%= time_ago_in_words(latest.created_at) %>
         ago</span></a> <span>from <%= h latest.source%></span>
         <% unless latest.in_reply_to_status.nil? %>
+          <%# TODO Make this like _tweet partial. %>
           <%= link_to "in reply to #{latest.in_reply_to_status.user.username}", status_path(latest.in_reply_to_status) %>
     <% end %>
     </span>

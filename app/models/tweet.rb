@@ -1,13 +1,13 @@
 class Tweet < ActiveRecord::Base
   belongs_to :user
-  belongs_to :recipient, :class_name => "User"
-  belongs_to :in_reply_to_status, :class_name => "Tweet"
+  belongs_to :recipient, class_name: "User"
+  belongs_to :in_reply_to_status, class_name: "Tweet"
 
   def self.replies
     where(tweet_type: 'reply')
   end
 
-  def self.mentions user
+  def self.mentions(user)
     where('tweet_type IN (?)', %w[tweet reply]).
     where('tweet LIKE ?', "%@#{user.username}%").
     order('created_at DESC')
@@ -16,30 +16,45 @@ class Tweet < ActiveRecord::Base
   def created_at_formatted
     self.created_at.gmtime.strftime("%a %b %d %H:%M:%S +0000 %Y")
   end
-  
-  def to_map(include_user=true)
-    if (tweet_type == 'direct')
-      ret = {:id=>id, 
-       :sender_id=>user_id, 
-       :text=>tweet, 
-       :recipient_id=>recipient_id, 
-       :created_at=>created_at_formatted, 
-       :sender_screen_name=>user.username, 
-       :recipient_screen_name=>recipient.username,
-       :sender=>user.to_map,
-       :recipient=>recipient.to_map()}
+
+  def related
+    predecessors = []
+    current = self
+    while current
+      predecessors << current
+      current = current.in_reply_to_status
+    end
+    predecessors
+    # TODO Add later replies.
+  end
+
+  def to_map(include_user = true)
+    if tweet_type == 'direct'
+      ret = {
+        id: id,
+        sender_id: user_id,
+        text: tweet,
+        recipient_id: recipient_id,
+        created_at: created_at_formatted,
+        sender_screen_name: user.username,
+        recipient_screen_name: recipient.username,
+        sender: user.to_map,
+        recipient: recipient.to_map()
+      }
     else
-      ret = {:truncated=>false,
-       :favorited=>false,
-       :in_reply_to_status_id=>in_reply_to_status_id,
-       :created_at=> created_at_formatted, #Sun Nov 23 09:19:13 +0000 2008"
-       :in_reply_to_user_id=>recipient_id,
-       :id=>id,
-       :source=>source,
-       :text=>tweet}
-       ret[:user] = user.to_map if include_user
-     end
-     ret
+      ret = {
+        truncated: false,
+        favorited: false,
+        in_reply_to_status_id: in_reply_to_status_id,
+        created_at: created_at_formatted, #Sun Nov 23 09:19:13 +0000 2008"
+        in_reply_to_user_id: recipient_id,
+        id: id,
+        source: source,
+        text: tweet
+      }
+      ret[:user] = user.to_map if include_user
+    end
+    ret
   end
 
   def self.top_ten_updaters
@@ -60,5 +75,4 @@ class Tweet < ActiveRecord::Base
     end
     hours
   end
-
 end

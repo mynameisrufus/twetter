@@ -27,4 +27,6 @@ Twetter::Application.routes.draw do
 
   match '/:username/status/:id' => 'statuses#show', as: 'user_status', constraints: {username: /[^\/]+/}
   match '/:username' => 'users#show', as: 'user', constraints: {username: /[^\/]+/}
+
+  match '/conversations/:id' => 'conversations#related'
 end
