@@ -16,7 +16,7 @@
             <a href="/<%= h tweet.user.username %>/status/<%= h tweet.id %>" class="entry-date" rel="bookmark"><span class="published"><%= time_ago_in_words(tweet.created_at) %> ago</span></a>
             <span>from <%= h tweet.source %></span>
             <% unless tweet.in_reply_to_status.nil? %>
-              <span><a href="/conversations/<%= tweet.id %>">in reply to <%= tweet.in_reply_to_status.user.username %></a></span>
+              <%= link_to "in reply to #{tweet.in_reply_to_status.user.username}", status_path(tweet.in_reply_to_status) %>
             <% end %>
         </span>
     </span>
@@ -26,6 +26,9 @@
         </div>
     </span>
     <ul class="actions-hover">
+      <li>
+        <a href="/conversations/<%= tweet.id %>">Conversation</a>
+      </li>
       <li>
         <span class="reply">
           <span class="reply-icon icon"></span>
