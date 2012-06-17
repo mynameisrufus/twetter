@@ -9,17 +9,4 @@
   </div>
 </div>
 
-<% content_for :javascript do %>
-  $('span.reply a').click(function() {
-    var status = $(this).parents('li.status');
-    var name = '@' + status.data('username');
-    $('input#in_reply_to_status_id').val(status.data('status-id'));
-
-    if (!$('textarea#status').val().match(name)) {
-      $('textarea#status').val(name + ' ' + $('textarea#status').val());
-    }
-    $('textarea#status').focus();
-
-    return false;
-  });
-<% end %>
+<%= render partial: 'reply_to_tweet' %>

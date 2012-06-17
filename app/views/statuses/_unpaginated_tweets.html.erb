@@ -1,0 +1,5 @@
+<ol class="statuses" id="timeline">
+  <%= render partial: 'statuses/tweet', collection: @tweets, locals: {type: 'friends'} %>
+</ol>
+
+<%= render partial: 'reply_to_tweet' %>
