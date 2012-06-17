@@ -18,12 +18,12 @@ class Tweet < ActiveRecord::Base
   end
 
   def related
-    ancestors + replies
+    ancestors + [self] + replies
   end
 
   def ancestors
     ancestors = []
-    current = self
+    current = in_reply_to_status
     while current
       ancestors << current
       current = current.in_reply_to_status
