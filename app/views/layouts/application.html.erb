@@ -9,7 +9,7 @@
 
   <title><%= @title %></title>
   <link href="/images/batbird.ico" rel="shortcut icon" type="image/x-icon"/>
-  <%= stylesheet_link_tag 'twitter', 'misc', 'geo', 'buttons_new' %>
+  <%= stylesheet_link_tag 'twitter', 'misc' %>
 
   <%= yield :head %>
 </head>
@@ -69,10 +69,11 @@
   </table>
 </div>
 
-  <script src="/javascripts/jquery.min.js" type="text/javascript"></script>
-  <script src="/javascripts/application.js" type="text/javascript"></script>
-  <script src="/javascripts/jquery.livequery.js" type="text/javascript"></script>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag(
+    'jquery.min.js',
+    'jquery.livequery.js',
+    'application.js'
+  ) %>
   <script type="text/javascript">
     //<![CDATA[
       <%= yield :javascript %>

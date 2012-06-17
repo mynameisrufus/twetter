@@ -215,3 +215,63 @@ img.twitter_logo {
 .top-nav li.signup-link {
   margin: 0 3px;
 }
+
+
+/* from buttons_new.css */
+
+.button {
+-moz-border-radius: 4px;
+-khtml-border-radius: 4px;
+-webkit-border-radius: 4px;
+background: #ddd url("http://s.twimg.com/a/1270853725/images/buttons/bg-btn.gif") repeat-x 0 0;
+border-bottom-color: #ccc;
+border-color: #ddd;
+border-radius: 4px;
+border-style: solid;
+border-width: 1px;
+color: #333;
+cursor: pointer;
+display: inline;
+font: 11px/14px "Lucida Grande",Sans-serif;
+margin: 0;
+overflow: visible;
+padding: 4px 8px 5px;
+text-shadow: 1px 1px 0 #fff;
+}
+.button::-moz-focus-inner {
+padding: 0;
+border: 0;
+}
+.button:focus {
+outline: none;
+}
+.button:hover,.button:focus {
+background-position: 0 -6px;
+border-color: #999 #999 #888;
+color: #000;
+}
+.button:active {
+background-image: none;
+text-shadow: none;
+outline: none;
+}
+:focus {
+-moz-outline-style: none;
+}
+
+
+/* from geo.css */
+
+li .refresh {
+background: url(http://s.twimg.com/a/1270853725/images/sprite-icons.png) no-repeat -96px -80px;
+width: 7px;
+margin: 0 5px 2px 2px;
+}
+li .clear {
+display: inline-block;
+background: url(http://s.twimg.com/a/1270853725/images/sprite-icons.png) no-repeat -128px -80px;
+height: 7px;
+width: 7px;
+margin: 0 5px 0 2px;
+vertical-align: middle;
+}

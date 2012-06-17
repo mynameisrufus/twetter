@@ -3,7 +3,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable
 
-  attr_accessible :email, :password
+  attr_accessible :email, :password, :name, :bio, :location
 
   has_attached_file :avatar
 

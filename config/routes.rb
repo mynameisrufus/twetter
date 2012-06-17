@@ -17,11 +17,14 @@ Twetter::Application.routes.draw do
     match '/direct_messages/sent' => 'direct_messages#sent'
     match '/favorites' => 'favorites#index'
 
+    match '/account/settings' => 'account#settings'
+    match '/account/picture' => 'account#picture'
+
     root to: 'statuses#friends_timeline'
   end
 
   match '/search' => 'statuses#search'
 
-  match '/:username/status/:id' => 'statuses#show', as: 'user_status'
-  match '/:username' => 'users#show', as: 'user'
+  match '/:username/status/:id' => 'statuses#show', as: 'user_status', constraints: {username: /[^\/]+/}
+  match '/:username' => 'users#show', as: 'user', constraints: {username: /[^\/]+/}
 end
