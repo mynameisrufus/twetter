@@ -9,3 +9,7 @@ gem 'devise'
 gem 'hirb'
 gem 'paperclip'
 gem 'kaminari'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+end
