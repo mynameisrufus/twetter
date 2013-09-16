@@ -36,4 +36,12 @@
         </span>
       </li>
     </ul>
+    <% unless tweet.image_file_name.nil? %>
+      <div class="tweet-image">
+        <p class="tweet-image-toggle">toggle image</p>
+        <div class="tweet-image-wrapper">
+          <%= image_tag tweet.image.url %>
+        </div>
+      </div>
+    <% end %>
 </li>

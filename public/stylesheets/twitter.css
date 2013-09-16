@@ -5580,3 +5580,13 @@ background-color: #ddeef6!important;
 border: 1px solid #ddeef6;
 width: 190px;
 }
+.tweet-image-toggle {
+color: #E65500;
+}
+.tweet-image-wrapper {
+padding: 10px;
+display: none;
+}
+.tweet-image-wrapper img {
+width: 100%;
+}

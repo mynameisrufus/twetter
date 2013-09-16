@@ -1,3 +1,12 @@
+$('.tweet-image').livequery(function() {
+  var tweetImageWrapper = $(this).find('.tweet-image-wrapper'),
+      tweetToggle = $(this).find('.tweet-image-toggle');
+
+  tweetToggle.click(function() {
+    tweetImageWrapper.toggle()
+  });
+});
+
 function showFlashNotice() {
   var notification = new InfoNotification();
   notification.setMessage("<%= alert || notice %>");

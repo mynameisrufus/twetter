@@ -3,6 +3,8 @@ class Tweet < ActiveRecord::Base
   belongs_to :recipient, class_name: "User"
   belongs_to :in_reply_to_status, class_name: "Tweet"
 
+  has_attached_file :image
+
   def self.timeline
     where("tweets.tweet_type!='direct'").order('created_at DESC')
   end
