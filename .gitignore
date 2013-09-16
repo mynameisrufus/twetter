@@ -1,7 +1,7 @@
 .bundle/
 db/*sqlite3
 db/*sql
-public/system/avatars
+public/system
 log/*
 tmp/*
 vendor/bundle/

@@ -3,16 +3,14 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable
 
-  attr_accessible :email, :password, :name, :bio, :location
-
   has_attached_file :avatar
 
   has_many :tweets
-  has_many :direct_messages_received, class_name: 'Tweet', foreign_key: 'recipient_id', conditions: "tweet_type='direct'", order: "tweets.created_at DESC"
-  has_many :direct_messages_sent, class_name: 'Tweet', conditions: "tweet_type='direct'", order: "tweets.created_at DESC"
+  has_many :direct_messages_received, -> { where(tweet_type: 'direct').order("tweets.created_at DESC") }, class_name: 'Tweet', foreign_key: 'recipient_id'
+  has_many :direct_messages_sent, -> { where(tweet_type: 'direct').order("tweets.created_at DESC") }, class_name: 'Tweet'
 
   has_many :favorites
-  has_many :favorite_tweets, source: :tweet, through: :favorites, order: "created_at DESC"
+  has_many :favorite_tweets, -> { order "created_at DESC" }, source: :tweet, through: :favorites
 
   validates_presence_of :username
   validates_uniqueness_of :username

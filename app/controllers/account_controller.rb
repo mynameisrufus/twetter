@@ -30,8 +30,8 @@ class AccountController < ApplicationController
   end
 
   def settings
-    if (request.put?)
-      if (current_user.update_attributes(params[:user]))
+    if (request.patch?)
+      if (current_user.update_attributes(user_params))
         flash[:notice] = 'User attributes updated'
       end
     end
@@ -49,5 +49,9 @@ class AccountController < ApplicationController
 
   def date_formatted(date)
     date.gmtime.strftime("%a %b %d %H:%M:%S +0000 %Y")
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :username, :bio, :location)
   end
 end

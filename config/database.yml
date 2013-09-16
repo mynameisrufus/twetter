@@ -1,11 +1,20 @@
 development:
   adapter: postgresql
   database: twetter_development
+  encoding: unicode
+  port: <%= ENV["BOXEN_POSTGRESQL_PORT"] || 5432 %>
+  host: localhost
 
 test:
   adapter: postgresql
   database: twetter_test
+  encoding: unicode
+  port: <%= ENV["BOXEN_POSTGRESQL_PORT"] || 5432 %>
+  host: localhost
 
 production:
   adapter: postgresql
   database: twetter_production
+  encoding: unicode
+  port: <%= ENV["BOXEN_POSTGRESQL_PORT"] || 5432 %>
+  host: localhost

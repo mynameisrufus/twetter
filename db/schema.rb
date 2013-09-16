@@ -9,23 +9,23 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120615070320) do
+ActiveRecord::Schema.define(version: 20120615070320) do
 
-  create_table "favorites", :id => false, :force => true do |t|
-    t.integer "user_id",  :null => false
-    t.integer "tweet_id", :null => false
+  create_table "favorites", id: false, force: true do |t|
+    t.integer "user_id",  null: false
+    t.integer "tweet_id", null: false
   end
 
-  create_table "oauth_requests", :force => true do |t|
+  create_table "oauth_requests", force: true do |t|
     t.integer  "user_id"
     t.string   "request_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tweets", :force => true do |t|
+  create_table "tweets", force: true do |t|
     t.string   "tweet"
     t.string   "source"
     t.string   "tweet_type"
@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(:version => 20120615070320) do
     t.integer  "in_reply_to_status_id"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "username",            :limit => 40
-    t.string   "name",                :limit => 100, :default => ""
-    t.string   "email",               :limit => 100
+  create_table "users", force: true do |t|
+    t.string   "username",            limit: 40
+    t.string   "name",                limit: 100, default: ""
+    t.string   "email",               limit: 100
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "bio"
@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(:version => 20120615070320) do
     t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.datetime "avatar_updated_at"
-    t.string   "encrypted_password",                 :default => "", :null => false
+    t.string   "encrypted_password",              default: "", null: false
   end
 
-  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

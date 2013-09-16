@@ -2,31 +2,34 @@ Twetter::Application.routes.draw do
   devise_for :users, sign_out_via: :get
 
   authenticate do
-    match '/home' => 'statuses#friends_timeline'
-    match '/replies' => 'statuses#replies'
-    match '/friends' => 'statuses#friends'
-    match '/followers' => 'statuses#followers'
+    get '/home' => 'statuses#friends_timeline'
+    get '/replies' => 'statuses#replies'
+    get '/friends' => 'statuses#friends'
+    get '/followers' => 'statuses#followers'
 
-    match '/statistics' => 'statuses#statistics'
-    match '/public_timeline' => 'statuses#public_timeline'
+    get '/statistics' => 'statuses#statistics'
+    get '/public_timeline' => 'statuses#public_timeline'
 
-    match '/statuses/public_timeline.:format' => 'statuses#friends_timeline'
-    match '/status/update' => 'statuses#update'
+    get '/statuses/public_timeline.:format' => 'statuses#friends_timeline'
+    post '/status/update' => 'statuses#update'
 
-    match '/direct_messages' => 'direct_messages#index'
-    match '/direct_messages/sent' => 'direct_messages#sent'
-    match '/favorites' => 'favorites#index'
+    get '/direct_messages' => 'direct_messages#index'
+    get '/direct_messages/sent' => 'direct_messages#sent'
+    get '/favorites' => 'favorites#index'
 
-    match '/account/settings' => 'account#settings'
-    match '/account/picture' => 'account#picture'
+    get '/account/settings' => 'account#settings'
+    patch '/account/settings' => 'account#settings'
+
+    get '/account/picture' => 'account#picture'
+    post '/account/picture' => 'account#picture'
 
     root to: 'statuses#friends_timeline'
   end
 
-  match '/search' => 'statuses#search'
+  get '/search' => 'statuses#search'
 
-  match '/:username/status/:id' => 'statuses#show', as: 'user_status', constraints: {username: /[^\/]+/}
-  match '/:username' => 'users#show', as: 'user', constraints: {username: /[^\/]+/}
+  get '/:username/status/:id' => 'statuses#show', as: 'user_status', constraints: {username: /[^\/]+/}
+  get '/:username' => 'users#show', as: 'user', constraints: {username: /[^\/]+/}
 
-  match '/conversations/:id' => 'conversations#related'
+  get '/conversations/:id' => 'conversations#related'
 end
